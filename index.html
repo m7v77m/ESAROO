@@ -2519,9 +2519,12 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
    - 灌溉：「發生日期（含今天）」＋「紀錄時間」
    - 電費：「紀錄日期（含今天）」＋「電錶度數」
    桌機版（> 768px）完全不受影響。
-   防止超出框外的做法：
-   ① 兩欄都用 minmax(0, …)，欄寬永遠不會被裡面的輸入框撐開
-   ② 日期／時間／數字框一律 min-width:0、max-width:100%，可以跟著縮小
+
+   實機（iPhone 13 mini）回報：電費的「電錶度數」寬度剛好，但變扁；
+   灌溉的「紀錄時間」會小幅超出框外。這一版：
+   ① 灌溉那一列把「紀錄時間」欄位加寬一點（原本日期:時間=1.5:1，改成1.15:1），
+      日期欄位仍夠放「發生日期＋今天」，時間欄位多出約20px的安全空間
+   ② 電費的「電錶度數」強制關掉手機系統自己的外觀樣式，避免系統高度蓋掉我們設定的高度
    ============================================================ */
 @media screen and (max-width: 768px) {
     body :is(#tab-other, #tab-elec) .form-group {
@@ -2529,6 +2532,10 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
         grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) !important;
         gap: 8px !important;
         align-items: end !important;
+    }
+    /* 灌溉：日期／時間欄位改成 1.15 : 1，給「紀錄時間」多一點安全空間，避免超框 */
+    body #tab-other .form-group {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
     }
     body :is(#tab-other, #tab-elec) .form-group > .input-box {
         min-width: 0 !important;
@@ -2570,6 +2577,14 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
         line-height: normal !important;
         border-radius: var(--radius-md) !important;
         margin: 0 !important;
+        vertical-align: middle !important;
+    }
+    /* 電錶度數（number）：iPhone 會用系統自己的高度規則蓋掉我們設定的高度，
+       導致看起來比旁邊的日期框矮／扁。強制關掉系統外觀，改用我們的框線與高度。 */
+    body #tab-elec .form-group #elecValue {
+        -webkit-appearance: none !important;
+        -moz-appearance: textfield !important;
+        appearance: none !important;
     }
 }
 </style>

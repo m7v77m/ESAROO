@@ -2484,6 +2484,35 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
     body #tab-items .items-entry-grid .date-with-today .today-btn { display: none !important; }
 }
 </style>
+<style id="items-gap-and-note-modal">
+/* 用品頁（手機／平板單欄）：用品紀錄搜尋卡片與分類管理卡片之間補上 10px，跟下方明細表的間距一致 */
+@media screen and (max-width: 768px) {
+    #tab-items .mobile-items-batch-panel { margin-top: 10px !important; }
+}
+
+/* 電費：備註編輯視窗的輸入框（字級 16px，iPhone 才不會自動放大畫面） */
+#elecNoteEditorText {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 140px;
+    padding: 10px 12px;
+    font-size: 16px;
+    line-height: 1.6;
+    font-family: inherit;
+    color: var(--text-main);
+    background: var(--beige);
+    border: 1px solid var(--matcha);
+    border-radius: 10px;
+    resize: vertical;
+    outline: none;
+}
+#elecNoteEditorText:focus { box-shadow: 0 0 0 2px var(--matcha-pale); }
+/* 手機：視窗靠上方顯示，鍵盤跳出來時按鈕才不會被擋住 */
+@media screen and (max-width: 768px) {
+    #elecNoteEditorModal { align-items: flex-start !important; padding-top: 8vh; box-sizing: border-box; }
+}
+</style>
 </head>
 <body>
 
@@ -2795,6 +2824,18 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
             <div id="categoryListContainer" style="max-height:300px; overflow-y:auto; margin-bottom:15px;"></div>
             <div style="text-align:right;">
                 <button class="btn-reset" onclick="closeCategoryModal()">關閉視窗</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 電費備註編輯 Modal ===== -->
+    <div class="modal-overlay" id="elecNoteEditorModal">
+        <div class="modal-box">
+            <h3 class="modal-header">✏️ 編輯備註內容</h3>
+            <textarea id="elecNoteEditorText" rows="6" placeholder="例如: 5元*尚餘30天=150元+前天度數18729=18879度"></textarea>
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:14px;">
+                <button class="btn-sm btn-cancel" style="padding:8px 22px !important; font-size:14px !important; margin-right:0 !important; width:auto !important; height:auto !important;" onclick="closeElecNoteEditor()">取消</button>
+                <button class="btn-sm btn-save" style="padding:8px 22px !important; font-size:14px !important; margin-right:0 !important; width:auto !important; height:auto !important;" onclick="confirmElecNoteEditor()">確定</button>
             </div>
         </div>
     </div>
@@ -3163,13 +3204,13 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
             }
         }
 
-        function exportJSON() {
-            const dataStr = JSON.stringify(appData, null, 2);
+        // 一般下載（最後的備援：存到瀏覽器預設的下載資料夾）
+        function downloadJSONFile(dataStr, fileName) {
             const blob = new Blob([dataStr], { type: "application/json" });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `綜合資料全域備份_${new Date().toISOString().split('T')[0]}.json`;
+            a.download = fileName;
             a.style.display = 'none';
             document.body.appendChild(a);
             a.click();
@@ -3177,6 +3218,49 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
                 a.remove();
                 URL.revokeObjectURL(url);
             }, 1000);
+        }
+
+        async function exportJSON() {
+            const fileName = `綜合資料全域備份_${new Date().toISOString().split('T')[0]}.json`;
+            const dataStr = JSON.stringify(appData, null, 2);
+
+            // ① 電腦版 Chrome / Edge：跳出「另存新檔」視窗，可選任何層的資料夾（也會記住上次選的位置）
+            if (typeof window.showSaveFilePicker === 'function') {
+                try {
+                    const handle = await window.showSaveFilePicker({
+                        id: 'records-backup',
+                        suggestedName: fileName,
+                        types: [{ description: 'JSON 備份檔', accept: { 'application/json': ['.json'] } }]
+                    });
+                    const writable = await handle.createWritable();
+                    await writable.write(dataStr);
+                    await writable.close();
+                    return;
+                } catch (err) {
+                    if (err && err.name === 'AbortError') return; // 你按了取消
+                    console.warn('另存新檔失敗，改用一般下載：', err);
+                    downloadJSONFile(dataStr, fileName);
+                    return;
+                }
+            }
+
+            // ② 手機（iPhone / Android）：開啟系統分享面板，選「儲存到檔案」就能挑任何資料夾（含 iCloud 雲端子資料夾）
+            if (typeof navigator.share === 'function' && typeof navigator.canShare === 'function') {
+                for (const mime of ['application/json', 'text/plain']) {
+                    try {
+                        const file = new File([dataStr], fileName, { type: mime });
+                        if (!navigator.canShare({ files: [file] })) continue;
+                        await navigator.share({ files: [file], title: fileName });
+                        return;
+                    } catch (err) {
+                        if (err && err.name === 'AbortError') return; // 你關掉了分享面板
+                        console.warn('分享失敗，嘗試其他方式：', err);
+                    }
+                }
+            }
+
+            // ③ 瀏覽器都不支援：維持原本的一般下載
+            downloadJSONFile(dataStr, fileName);
         }
 
         function importJSON(event) {
@@ -3258,6 +3342,35 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
             document.getElementById('elecValue').value = '';
             document.getElementById('elecNote').value = '';
         }
+
+        // ================================================================
+        //  電費：備註內容「另外跳出」加長視窗編輯
+        // ================================================================
+        function openElecNoteEditor() {
+            const input = document.getElementById('editElecNote');
+            const modal = document.getElementById('elecNoteEditorModal');
+            const ta = document.getElementById('elecNoteEditorText');
+            if (!input || !modal || !ta) return;
+            ta.value = input.value;
+            modal.style.display = 'flex';
+            ta.focus();
+            try { ta.setSelectionRange(ta.value.length, ta.value.length); } catch (e) {}
+        }
+        function confirmElecNoteEditor() {
+            const input = document.getElementById('editElecNote');
+            const ta = document.getElementById('elecNoteEditorText');
+            // 單行備註：換行一律轉成空白
+            if (input && ta) input.value = ta.value.replace(/[\r\n]+/g, ' ');
+            closeElecNoteEditor();
+        }
+        function closeElecNoteEditor() {
+            const modal = document.getElementById('elecNoteEditorModal');
+            if (modal) modal.style.display = 'none';
+        }
+        document.addEventListener('keydown', function (e) {
+            const modal = document.getElementById('elecNoteEditorModal');
+            if (e.key === 'Escape' && !e.isComposing && modal && modal.style.display === 'flex') closeElecNoteEditor();
+        });
 
         function saveEditElec(id) {
             let serial = document.getElementById('editElecSerial').value.trim();
@@ -3416,7 +3529,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
                             <td><div style="display:flex; gap:4px;"><input type="date" id="editElecDate" value="${rec.date}" class="edit-input"></div></td>
                             <td><input type="number" id="editElecValue" value="${rec.value}" step="0.1" class="edit-input"></td>
                             <td>-</td><td>-</td>
-                            <td><input type="text" id="editElecNote" value="${rec.note || ''}" class="edit-input"></td>
+                            <td><input type="text" id="editElecNote" value="${rec.note || ''}" class="edit-input" readonly placeholder="點一下開啟編輯視窗" title="點一下開啟編輯視窗" style="cursor:pointer;" onclick="openElecNoteEditor()" onkeydown="if(event.key==='Enter'){event.preventDefault();openElecNoteEditor();}"></td>
                             <td class="action-cell">
                                 <button class="btn-sm btn-save" onclick="saveEditElec(${rec.id})">儲存</button>
                                 <button class="btn-sm btn-cancel" onclick="cancelEdit()">取消</button>

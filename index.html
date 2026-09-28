@@ -2513,6 +2513,66 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
     #elecNoteEditorModal { align-items: flex-start !important; padding-top: 8vh; box-sizing: border-box; }
 }
 </style>
+<style id="same-row-fields">
+/* ============================================================
+   📱 手機／小平板（寬度 ≤ 768px）：把兩個欄位並排在同一列，省一列高度
+   - 灌溉：「發生日期（含今天）」＋「紀錄時間」
+   - 電費：「紀錄日期（含今天）」＋「電錶度數」
+   桌機版（> 768px）完全不受影響。
+   防止超出框外的做法：
+   ① 兩欄都用 minmax(0, …)，欄寬永遠不會被裡面的輸入框撐開
+   ② 日期／時間／數字框一律 min-width:0、max-width:100%，可以跟著縮小
+   ============================================================ */
+@media screen and (max-width: 768px) {
+    body :is(#tab-other, #tab-elec) .form-group {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) !important;
+        gap: 8px !important;
+        align-items: end !important;
+    }
+    body :is(#tab-other, #tab-elec) .form-group > .input-box {
+        min-width: 0 !important;
+        max-width: none !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+    /* 這幾個維持整列：電費的流水序號、兩頁的備註內容、新增紀錄按鈕 */
+    body #tab-elec  .form-group > .input-box:nth-child(1),
+    body #tab-elec  .form-group > .input-box:nth-child(4),
+    body #tab-other .form-group > .input-box:nth-child(3),
+    body :is(#tab-other, #tab-elec) .form-group > .btn-add {
+        grid-column: 1 / -1 !important;
+    }
+
+    /* 日期＋「今天」：日期框可以縮，「今天」維持原本大小 */
+    body :is(#tab-other, #tab-elec) .form-group .date-with-today {
+        width: 100% !important;
+        min-width: 0 !important;
+    }
+    body :is(#tab-other, #tab-elec) .form-group .date-with-today input[type="date"] {
+        flex: 1 1 0% !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+    }
+
+    /* 紀錄時間、電錶度數：規格和旁邊的日期框一致（同高、同字級、同圓角），寬度貼齊自己的欄位 */
+    body #tab-other .form-group #bowelTime,
+    body #tab-elec  .form-group #elecValue {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        height: var(--fld-h) !important;
+        min-height: var(--fld-h) !important;
+        padding: 6px 10px !important;
+        font-size: var(--fld-fs) !important;
+        line-height: normal !important;
+        border-radius: var(--radius-md) !important;
+        margin: 0 !important;
+    }
+}
+</style>
 </head>
 <body>
 
@@ -4043,7 +4103,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
     <script>
         // 建立飄落小熊的魔法陣
         function createRilakkuma() {
-            const icons = ['🪷','🧚','🐨','🎋']; // 飄落的拉拉熊、小黃雞、草莓小熊
+            const icons = ['✨','🧚','🍀','🎋']; // 飄落的拉拉熊、小黃雞、草莓小熊
             const flake = document.createElement('div');
             
             flake.className = 'rilakkuma-flake';

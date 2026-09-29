@@ -2513,81 +2513,6 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
     #elecNoteEditorModal { align-items: flex-start !important; padding-top: 8vh; box-sizing: border-box; }
 }
 </style>
-<style id="same-row-fields">
-/* ============================================================
-   📱 手機／小平板（寬度 ≤ 768px）：把兩個欄位並排在同一列，省一列高度
-   - 灌溉：「發生日期（含今天）」＋「紀錄時間」
-   - 電費：「紀錄日期（含今天）」＋「電錶度數」
-   桌機版（> 768px）完全不受影響。
-
-   實機（iPhone 13 mini）回報：電費的「電錶度數」寬度剛好，但變扁；
-   灌溉的「紀錄時間」會小幅超出框外。這一版：
-   ① 灌溉那一列把「紀錄時間」欄位加寬一點（原本日期:時間=1.5:1，改成1.15:1），
-      日期欄位仍夠放「發生日期＋今天」，時間欄位多出約20px的安全空間
-   ② 電費的「電錶度數」強制關掉手機系統自己的外觀樣式，避免系統高度蓋掉我們設定的高度
-   ============================================================ */
-@media screen and (max-width: 768px) {
-    body :is(#tab-other, #tab-elec) .form-group {
-        display: grid !important;
-        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) !important;
-        gap: 8px !important;
-        align-items: end !important;
-    }
-    /* 灌溉：日期／時間欄位改成 1.15 : 1，給「紀錄時間」多一點安全空間，避免超框 */
-    body #tab-other .form-group {
-        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) !important;
-    }
-    body :is(#tab-other, #tab-elec) .form-group > .input-box {
-        min-width: 0 !important;
-        max-width: none !important;
-        margin: 0 !important;
-        box-sizing: border-box !important;
-    }
-    /* 這幾個維持整列：電費的流水序號、兩頁的備註內容、新增紀錄按鈕 */
-    body #tab-elec  .form-group > .input-box:nth-child(1),
-    body #tab-elec  .form-group > .input-box:nth-child(4),
-    body #tab-other .form-group > .input-box:nth-child(3),
-    body :is(#tab-other, #tab-elec) .form-group > .btn-add {
-        grid-column: 1 / -1 !important;
-    }
-
-    /* 日期＋「今天」：日期框可以縮，「今天」維持原本大小 */
-    body :is(#tab-other, #tab-elec) .form-group .date-with-today {
-        width: 100% !important;
-        min-width: 0 !important;
-    }
-    body :is(#tab-other, #tab-elec) .form-group .date-with-today input[type="date"] {
-        flex: 1 1 0% !important;
-        width: auto !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-    }
-
-    /* 紀錄時間、電錶度數：規格和旁邊的日期框一致（同高、同字級、同圓角），寬度貼齊自己的欄位 */
-    body #tab-other .form-group #bowelTime,
-    body #tab-elec  .form-group #elecValue {
-        width: 100% !important;
-        min-width: 0 !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        height: var(--fld-h) !important;
-        min-height: var(--fld-h) !important;
-        padding: 6px 10px !important;
-        font-size: var(--fld-fs) !important;
-        line-height: normal !important;
-        border-radius: var(--radius-md) !important;
-        margin: 0 !important;
-        vertical-align: middle !important;
-    }
-    /* 電錶度數（number）：iPhone 會用系統自己的高度規則蓋掉我們設定的高度，
-       導致看起來比旁邊的日期框矮／扁。強制關掉系統外觀，改用我們的框線與高度。 */
-    body #tab-elec .form-group #elecValue {
-        -webkit-appearance: none !important;
-        -moz-appearance: textfield !important;
-        appearance: none !important;
-    }
-}
-</style>
 </head>
 <body>
 
@@ -4118,7 +4043,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
     <script>
         // 建立飄落小熊的魔法陣
         function createRilakkuma() {
-            const icons = ['✨','🧚','🍀','🎋']; // 飄落的拉拉熊、小黃雞、草莓小熊
+            const icons = ['🪷','🧚','🐨','🎋']; // 飄落的拉拉熊、小黃雞、草莓小熊
             const flake = document.createElement('div');
             
             flake.className = 'rilakkuma-flake';

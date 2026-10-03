@@ -2513,6 +2513,54 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
     #elecNoteEditorModal { align-items: flex-start !important; padding-top: 8vh; box-sizing: border-box; }
 }
 </style>
+
+<style id="items-table-wrap-and-edit-dates">
+/* 用品明細：商品名稱(第3欄)、購買商家(第7欄)文字滿格自動換行，不再把欄位越撐越寬 */
+body #tab-items > table td:nth-child(3),
+body #tab-items > table td:nth-child(7) {
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-all !important;
+    line-height: 1.45 !important;
+}
+@media screen and (max-width: 768px) {
+    /* 手機：這兩欄固定「7 個中文字寬 + 左右一點點邊距」 */
+    body #tab-items > table th:nth-child(3),
+    body #tab-items > table td:nth-child(3),
+    body #tab-items > table th:nth-child(7),
+    body #tab-items > table td:nth-child(7) {
+        box-sizing: content-box !important;
+        width: 7em !important;
+        min-width: 7em !important;
+        max-width: 7em !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+    body #tab-items > table td:nth-child(3) { font-size: 13px !important; }
+    body #tab-items > table td:nth-child(7) { font-size: 13px !important; }
+    body #tab-items > table th:nth-child(3),
+    body #tab-items > table th:nth-child(7) { white-space: nowrap !important; font-size: 13px !important; }
+}
+
+/* 編輯模式：購買日期、最終日期兩個框框不再重疊，中間留出空隙 */
+body #tab-items > table th:nth-child(4),
+body #tab-items > table td:nth-child(4),
+body #tab-items > table th:nth-child(5),
+body #tab-items > table td:nth-child(5) {
+    min-width: 150px;
+}
+body #tab-items > table input.edit-input[type="date"] {
+    display: block;
+    width: calc(100% - 12px) !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 12px) !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    padding: 0 6px !important;
+    font-size: 13px !important;
+    text-align: center;
+}
+</style>
 </head>
 <body>
 
@@ -2831,7 +2879,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
     <!-- ===== 電費備註編輯 Modal ===== -->
     <div class="modal-overlay" id="elecNoteEditorModal">
         <div class="modal-box">
-            <h3 class="modal-header">✏️ 編輯備註內容</h3>
+            <h3 class="modal-header" id="elecNoteEditorTitle">✏️ 編輯備註內容</h3>
             <textarea id="elecNoteEditorText" rows="6" placeholder="例如: 5元*尚餘30天=150元+前天度數18729=18879度"></textarea>
             <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:14px;">
                 <button class="btn-sm btn-cancel" style="padding:8px 22px !important; font-size:14px !important; margin-right:0 !important; width:auto !important; height:auto !important;" onclick="closeElecNoteEditor()">取消</button>
@@ -3346,18 +3394,31 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
         // ================================================================
         //  電費：備註內容「另外跳出」加長視窗編輯
         // ================================================================
+        let noteEditorTargetId = 'editElecNote';
         function openElecNoteEditor() {
-            const input = document.getElementById('editElecNote');
+            openTextEditor('editElecNote', '備註內容', '例如: 5元*尚餘30天=150元+前天度數18729=18879度');
+        }
+        // 用品：商品名稱、購買商家也用同一個加大視窗編輯
+        function openItemTextEditor(inputId, label) {
+            const ph = label === '商品名稱' ? '例如: 五月花/厚棒/連續抽取式/衛生紙/永豐餘' : '例如: 全聯福利中心/二中店';
+            openTextEditor(inputId, label, ph);
+        }
+        function openTextEditor(inputId, label, placeholder) {
+            const input = document.getElementById(inputId);
             const modal = document.getElementById('elecNoteEditorModal');
             const ta = document.getElementById('elecNoteEditorText');
             if (!input || !modal || !ta) return;
+            noteEditorTargetId = inputId;
+            const title = document.getElementById('elecNoteEditorTitle');
+            if (title) title.textContent = '✏️ 編輯' + label;
+            ta.placeholder = placeholder || '';
             ta.value = input.value;
             modal.style.display = 'flex';
             ta.focus();
             try { ta.setSelectionRange(ta.value.length, ta.value.length); } catch (e) {}
         }
         function confirmElecNoteEditor() {
-            const input = document.getElementById('editElecNote');
+            const input = document.getElementById(noteEditorTargetId);
             const ta = document.getElementById('elecNoteEditorText');
             // 單行備註：換行一律轉成空白
             if (input && ta) input.value = ta.value.replace(/[\r\n]+/g, ' ');
@@ -3742,11 +3803,11 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
                                     ${appData.categories.map(c => `<option value="${c}" ${displayCategory===c?'selected':''}>${c}</option>`).join('')}
                                 </select>
                             </td>
-                            <td><input type="text" id="editItemName_${item.id}" value="${item.name}" class="edit-input"></td>
+                            <td><input type="text" id="editItemName_${item.id}" value="${String(item.name).replace(/"/g,'&quot;')}" class="edit-input" readonly placeholder="點一下開啟編輯視窗" title="點一下開啟編輯視窗" style="cursor:pointer;" onclick="openItemTextEditor('editItemName_${item.id}','商品名稱')" onkeydown="if(event.key==='Enter'){event.preventDefault();openItemTextEditor('editItemName_${item.id}','商品名稱');}"></td>
                             <td><input type="date" id="editItemStart_${item.id}" value="${item.start}" class="edit-input"></td>
                             <td><input type="date" id="editItemEnd_${item.id}" value="${item.end || ''}" class="edit-input"></td>
                             <td>-</td>
-                            <td><input type="text" id="editItemStore_${item.id}" value="${item.store || item.note || ''}" class="edit-input"></td>
+                            <td><input type="text" id="editItemStore_${item.id}" value="${String(item.store || item.note || '').replace(/"/g,'&quot;')}" class="edit-input" readonly placeholder="點一下開啟編輯視窗" title="點一下開啟編輯視窗" style="cursor:pointer;" onclick="openItemTextEditor('editItemStore_${item.id}','購買商家')" onkeydown="if(event.key==='Enter'){event.preventDefault();openItemTextEditor('editItemStore_${item.id}','購買商家');}"></td>
                             <td class="action-cell">
                                 <button class="btn-sm btn-save" onclick="saveEditItem(${item.id})">儲存</button>
                                 <button class="btn-sm btn-cancel" onclick="cancelEdit()">取消</button>

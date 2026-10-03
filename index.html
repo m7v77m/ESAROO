@@ -2561,6 +2561,28 @@ body #tab-items > table input.edit-input[type="date"] {
     text-align: center;
 }
 </style>
+<style id="date-vcenter-and-accent">
+/* 日期／時間框：文字垂直置中
+   原因：框高 25px 卻有上下各 6px 內距，內容區只剩約 11px，字被擠偏上。
+   作法：上下內距歸零，讓瀏覽器自己把字置中。 */
+body :is(#tab-elec, #tab-items, #tab-other) input[type="date"]:not(.edit-input),
+body :is(#tab-elec, #tab-items, #tab-other) input[type="time"]:not(.edit-input),
+body :is(#tab-elec, #tab-items, #tab-other) .date-with-today input[type="date"] {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: normal !important;
+}
+body input[type="date"]::-webkit-date-and-time-value,
+body input[type="time"]::-webkit-date-and-time-value {
+    margin: 0 !important;
+    min-height: 1.3em;
+}
+
+/* 日期選擇視窗的重點色（箭頭、選取日期、確認鈕）：莫蘭迪綠
+   注意：視窗是手機系統畫的，瀏覽器不一定肯聽 accent-color */
+:root { accent-color: #8fa382; color-scheme: light; }
+input[type="date"], input[type="time"] { accent-color: #8fa382; color-scheme: light; }
+</style>
 </head>
 <body>
 

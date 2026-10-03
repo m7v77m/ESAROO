@@ -804,15 +804,15 @@ table:has(#bowelTableBody) td {
 }
 
 
-/* ：間格寬度一致等寬 - 上下左右紅框都一樣12px */
+/* 子晴：間格寬度一致等寬 - 上下左右紅框都一樣12px */
 #tab-items.tab-content {
     padding: 12px !important; /* 外框12px */
     box-sizing: border-box !important;
 }
 
 #tab-items .top-controls-wrapper {
-    gap: 12px !important; /* 左右卡片之間12px = 中間直紅框 */
-    margin-bottom: 12px !important; /* 卡片與表格之間12px = 橫紅框 */
+    gap: 12px !important; /* 左右卡片之間12px = 子晴中間直紅框 */
+    margin-bottom: 12px !important; /* 卡片與表格之間12px = 子晴橫紅框 */
     padding: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -841,13 +841,13 @@ table:has(#bowelTableBody) td {
     table-layout: fixed !important;
 }
 
-/* 表格欄位等寬 - 要的等寬 */
+/* 表格欄位等寬 - 子晴要的等寬 */
 #tab-items > table th,
 #tab-items > table td {
     box-sizing: border-box !important;
 }
 
-/* 如果想要表格欄位也等寬，7個欄位平均 */
+/* 如果子晴想要表格欄位也等寬，7個欄位平均 */
 #tab-items > table th:nth-child(1),
 #tab-items > table td:nth-child(1) { width: 40px !important; } /* checkbox */
 #tab-items > table th:nth-child(2),
@@ -884,26 +884,26 @@ table:has(#bowelTableBody) td {
 }
 
 
-/* 專用：只要改一個數字，全部縫隙一起變！ */
+/* 子晴專用：只要改一個數字，全部縫隙一起變！ */
 :root {
-    --縫隙: 12px; /* 改這裡！10px緊，12px剛好，16px鬆 */
+    --子晴縫隙: 12px; /* 改這裡！10px緊，12px剛好，16px鬆 */
 }
 
 #tab-items.tab-content {
-    padding: var(--縫隙) !important;
+    padding: var(--子晴縫隙) !important;
 }
 
 #tab-items .top-controls-wrapper {
-    gap: var(--縫隙) !important;
-    margin-bottom: var(--縫隙) !important;
+    gap: var(--子晴縫隙) !important;
+    margin-bottom: var(--子晴縫隙) !important;
 }
 
 #tab-items .search-panel.tab-search-panel {
-    max-width: calc(58% - var(--縫隙)/2) !important;
+    max-width: calc(58% - var(--子晴縫隙)/2) !important;
 }
 
 #tab-items .batch-panel {
-    max-width: calc(42% - var(--縫隙)/2) !important;
+    max-width: calc(42% - var(--子晴縫隙)/2) !important;
 }
 
 /* 表格也跟著對齊 */
@@ -913,7 +913,7 @@ table:has(#bowelTableBody) td {
 }
 
 
-/* === 最終版：全部縫隙跟拉拉熊收進褲袋版記帳本一樣等距 === */
+/* === 子晴最終版：全部縫隙跟拉拉熊收進褲袋版記帳本一樣等距 === */
 /* 拉拉熊版原本設定： */
 /* .main-container padding: 15px 15px; */
 /* .top-controls-wrapper gap: 15px; margin-bottom: 15px; */
@@ -921,17 +921,17 @@ table:has(#bowelTableBody) td {
 /* 為了等距，龍寶統一成 15px，跟記帳本視覺一樣 */
 
 :root {
-    --縫隙-拉拉熊版: 15px; /* 拉拉熊版原本是15px上下 + 15px左右，統一後用15px最像 */
+    --子晴縫隙-拉拉熊版: 15px; /* 拉拉熊版原本是15px上下 + 15px左右，統一後用15px最像 */
 }
 
 #tab-items.tab-content {
-    padding: var(--縫隙-拉拉熊版) !important;
-    gap: var(--縫隙-拉拉熊版) !important;
+    padding: var(--子晴縫隙-拉拉熊版) !important;
+    gap: var(--子晴縫隙-拉拉熊版) !important;
 }
 
 #tab-items .top-controls-wrapper {
-    gap: var(--縫隙-拉拉熊版) !important; /* 左右15px = 拉拉熊版 */
-    margin-bottom: var(--縫隙-拉拉熊版) !important; /* 上下15px = 拉拉熊版 */
+    gap: var(--子晴縫隙-拉拉熊版) !important; /* 左右15px = 拉拉熊版 */
+    margin-bottom: var(--子晴縫隙-拉拉熊版) !important; /* 上下15px = 拉拉熊版 */
     padding: 0 !important;
 }
 
@@ -949,7 +949,7 @@ table:has(#bowelTableBody) td {
 }
 
 
-/* === 修復：消除6個紅框突出角 + 套用選項等寬 === */
+/* === 子晴修復：消除6個紅框突出角 + 套用選項等寬 === */
 
 /* 消除左右上下突出小白角 */
 .main-container,
@@ -1006,20 +1006,20 @@ button[onclick="openCategoryModal()"] {
     width: 100% !important;
 }
 
-/* 全部縫隙15px等距 - 已改 */
+/* 全部縫隙15px等距 - 子晴已改 */
 :root {
-    --縫隙: 15px;
+    --子晴縫隙: 15px;
 }
 
 
-/* === 要求：網頁所有圓角統一 === */
+/* === 子晴要求：網頁所有圓角統一 === */
 
 :root {
     --radius-sm: 15px !important;
     --radius-md: 15px !important;
     --radius-lg: 15px !important;
     --radius-full: 15px !important;
-    --圓角: 15px !important;
+    --子晴圓角: 15px !important;
 }
 
 /* 強制所有卡片、輸入框、按鈕、表格都用15px圓角 */
@@ -1096,8 +1096,8 @@ table {
 #tab-electricity .top-controls-wrapper,
 #tab-items .top-controls-wrapper,
 .top-controls-wrapper {
-    gap: 15px !important; /* 左右縫隙15px - 紅色直線 */     
-    margin-bottom: 15px !important; /* 上下縫隙15px - 紅色橫線 */
+    gap: 15px !important; /* 左右縫隙15px - 子晴紅色直線 */     
+    margin-bottom: 15px !important; /* 上下縫隙15px - 子晴紅色橫線 */
     row-gap: 15px !important;
     column-gap: 15px !important;
     padding: 0 !important;
@@ -2710,7 +2710,7 @@ input[type="date"], input[type="time"] { accent-color: #8fa382; color-scheme: li
         <div id="tab-items" class="tab-content">
             <!-- 套用 top-controls-wrapper 讓三個區塊水平排列在同一列 -->
             
-            <!-- 套用 top-controls-wrapper 讓三個區塊水平排列在同一列 - 紅框模板修復版 -->
+            <!-- 套用 top-controls-wrapper 讓三個區塊水平排列在同一列 - 子晴紅框模板修復版 -->
             <div class="top-controls-wrapper" style="display:flex; gap:12px; margin-bottom:12px; align-items:flex-start; flex-wrap:wrap;">
                 
                 <!-- 1. 搜尋面板 - 左邊 -->
@@ -2813,12 +2813,12 @@ input[type="date"], input[type="time"] { accent-color: #8fa382; color-scheme: li
                 <thead>
                     <tr>
                         <th style="width:30px; text-align:center;"><input type="checkbox" id="selectAllItems" onchange="toggleSelectAllItems(this)"></th>
-                        <th class="sortable-header nowrap-cell" style="width:35%;" onclick="toggleItemSort('category')">品項分類<span id="sortIndicator_category" class="sort-icon"></span></th>
-                        <th style="width:35%;">商品名稱</th>
+                        <th class="sortable-header nowrap-cell" style="width:12%;" onclick="toggleItemSort('category')">品項分類<span id="sortIndicator_category" class="sort-icon"></span></th>
+                        <th style="width:auto;">商品名稱</th>
                         <th class="sortable-header nowrap-cell" onclick="toggleItemSort('start')">購買日期<span id="sortIndicator_start" class="sort-icon"></span></th>
                         <th class="sortable-header nowrap-cell" onclick="toggleItemSort('end')">最終日期<span id="sortIndicator_end" class="sort-icon"></span></th>
-                        <th class="nowrap-cell" style="width:35%;">使用天數</th>
-                        <th style="width:35%;">購買商家</th>
+                        <th class="nowrap-cell" style="width:10%;">使用天數</th>
+                        <th style="width:15%;">購買商家</th>
                         <th class="nowrap-cell" style="width:110px;">操作編輯</th>
                     </tr>
                 </thead>

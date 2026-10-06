@@ -2618,58 +2618,6 @@ input[type="date"] { pointer-events: none !important; }   /* 不再叫出系統�
     cursor: pointer; border: 1px solid #E8D5C4 !important; background: #F5EDE0 !important; color: #4A3728 !important; }
 #dpCard .dp-btn.dp-primary { background: #8fa382 !important; border-color: #8fa382 !important; color: #fff !important; }
 </style>
-<style id="today-inside-date-box">
-/* 【統一】三個模式的「今天」都疊在日期框的右側裡面（不再與日期框分開）
-   電費：紀錄日期／用品：購買日期、最終日期、搜尋日期／灌溉：發生日期 */
-body :is(#tab-elec, #tab-items, #tab-other) .date-with-today {
-    position: relative !important;
-    display: block !important;
-    grid-template-columns: none !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    height: auto !important;
-    margin: 0 !important;
-    gap: 0 !important;
-}
-body :is(#tab-elec, #tab-items, #tab-other) .date-with-today input[type="date"] {
-    display: block !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    box-sizing: border-box !important;
-    padding-right: 62px !important;      /* 右邊留位置給「今天」 */
-    padding-left: 10px !important;
-}
-body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn,
-body #tab-items .items-entry-grid .date-with-today .today-btn,
-body #tab-other .date-with-today .today-btn {
-    position: absolute !important;
-    right: 4px !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    width: auto !important;
-    min-width: 46px !important;
-    max-width: 56px !important;
-    height: calc(var(--fld-h) - 8px) !important;
-    min-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 8px !important;
-    font-size: 13px !important;
-    line-height: 1 !important;
-    border-radius: 999px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-    white-space: nowrap !important;
-    z-index: 2 !important;
-}
-/* 小平板之前為了擠不下把「今天」藏起來；現在疊在框裡就放得下，一律顯示 */
-@media screen and (min-width: 769px) and (max-width: 899px) {
-    body #tab-items .items-entry-grid .date-with-today .today-btn { display: inline-flex !important; }
-}
-</style>
 </head>
 <body>
 
@@ -4554,7 +4502,7 @@ body #tab-other .date-with-today .today-btn {
 
     /* 日期框本身設成不接收點擊，改用座標判斷「點到哪一個日期框」，連之後才產生的編輯列日期框也適用 */
     document.addEventListener('click', function(e){
-        if (e.target.closest && (e.target.closest('#dpOverlay') || e.target.closest('.today-btn'))) return;
+        if (e.target.closest && e.target.closest('#dpOverlay')) return;
         const list = document.querySelectorAll('input[type="date"]');
         for (const inp of list){
             if (inp.disabled) continue;
@@ -4567,71 +4515,6 @@ body #tab-other .date-with-today .today-btn {
             }
         }
     }, true);
-})();
-</script>
-<script>
-/* 🔄 接收「時來運轉」同步過來的日用／交通支出，加進「用品」紀錄
-   做法：時來運轉新增紀錄時，把待同步資料放進瀏覽器的共用暫存（同一個網址 m7v77m.github.io 底下的兩個頁面才共用）；
-   這一頁打開（或切回來）時讀取，補進用品，並自動分類。 */
-(function crossSyncFromExpense(){
-    const QUEUE_KEY = 'CrossSync_ExpenseToItems_v1';
-
-    function guessCategory(name){
-        const n = String(name || '').trim().toLowerCase();
-        if (!n) return '尚未分類';
-        const cats = (appData.categories || []);
-        const valid = c => c && c !== '尚未分類' && cats.includes(c);
-        // 1) 以前記過一模一樣的品名 → 沿用它的分類
-        const same = appData.items.find(i => String(i.name || '').trim().toLowerCase() === n && valid(i.category));
-        if (same) return same.category;
-        // 2) 品名彼此包含（至少 2 個字）→ 沿用相近品名的分類
-        const near = appData.items.find(i => {
-            const o = String(i.name || '').trim().toLowerCase();
-            return valid(i.category) && o.length >= 2 && n.length >= 2 && (o.includes(n) || n.includes(o));
-        });
-        if (near) return near.category;
-        // 3) 分類名稱（去掉結尾「用品」）出現在品名裡
-        const byCat = cats.find(c => { const k = c.replace(/用品$/, ''); return k.length >= 2 && n.includes(k.toLowerCase()); });
-        if (byCat) return byCat;
-        return '尚未分類';
-    }
-
-    function toast(msg){
-        const t = document.createElement('div');
-        t.textContent = msg;
-        t.style.cssText = 'position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#8fa382;color:#fff;padding:10px 16px;border-radius:999px;font-size:14px;font-weight:600;z-index:100001;box-shadow:0 6px 18px rgba(74,55,40,.3);max-width:88vw;text-align:center;';
-        document.body.appendChild(t);
-        setTimeout(() => t.remove(), 3500);
-    }
-
-    function importPending(){
-        let q = [];
-        try { q = JSON.parse(localStorage.getItem(QUEUE_KEY) || '[]'); } catch (e) { q = []; }
-        if (!Array.isArray(q) || q.length === 0) return;
-        if (typeof appData === 'undefined' || !Array.isArray(appData.items)) return;
-        const seen = new Set(appData.items.map(i => i.syncId).filter(Boolean));
-        let added = 0, uncat = 0;
-        q.forEach((r, k) => {
-            if (!r || !r.syncId || seen.has(r.syncId) || !r.name || !r.start) return;
-            const category = guessCategory(r.name);
-            if (category === '尚未分類') uncat++;
-            appData.items.push({ id: Date.now() + k, category, name: r.name, start: r.start, end: '', store: r.store || '', syncId: r.syncId });
-            seen.add(r.syncId);
-            added++;
-        });
-        localStorage.removeItem(QUEUE_KEY);
-        if (added > 0) {
-            saveData();
-            toast('🔄 已從時來運轉同步 ' + added + ' 筆用品' + (uncat ? '（' + uncat + ' 筆待分類）' : ''));
-        }
-    }
-
-    window.importCrossSyncNow = importPending;
-    window.addEventListener('load', () => setTimeout(importPending, 400));
-    window.addEventListener('pageshow', () => setTimeout(importPending, 200));
-    window.addEventListener('focus', importPending);
-    window.addEventListener('storage', e => { if (e.key === QUEUE_KEY) importPending(); });
-    document.addEventListener('visibilitychange', () => { if (!document.hidden) importPending(); });
 })();
 </script>
 </body>

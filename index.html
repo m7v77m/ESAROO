@@ -2715,8 +2715,8 @@ body #tab-other #bowelTime:not(.edit-input):not(.edit-input):not(.edit-input) {
 /* 「今天」按鈕：綠色小圓鈕，高度比框小 8px，垂直置中 */
 body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-btn.today-btn {
     height: 44px !important;
-    min-width: 55px !important;
-    max-width: 55px !important;
+    min-width: 57px !important;
+    max-width: 57px !important;
     padding: 0 10px !important;
     right: -1px !important;
     font-size: 13px !important;
@@ -2787,8 +2787,8 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
                         <label>關鍵字串</label>
                         <input type="text" id="elecFilterKeyword" placeholder="輸入備註內容" oninput="renderElectricity()">
                     </div>
-                    <button class="btn-sm btn-save" style="background-color:#8fa382; color:white; font-size:12.5px; white-space:nowrap; height:38px;" onclick="filterElecByKeyword()">🔍 只看含「電費」</button>
-                    <button class="btn-sm" style="background-color:var(--milk-tea-dark); color:white; font-size:12.5px; white-space:nowrap; height:38px;" onclick="selectAllFilteredElec()">☑️ 全選篩選結果</button>
+                    <button class="btn-sm btn-save" style="background-color:#8fa382; color:white; font-size:13px; white-space:nowrap; height:38px;" onclick="filterElecByKeyword()">🔍 只看含「電費」</button>
+                    <button class="btn-sm" style="background-color:var(--milk-tea-dark); color:white; font-size:13px; white-space:nowrap; height:38px;" onclick="selectAllFilteredElec()">☑ 全選篩選結果</button>
                     <button class="btn-reset" onclick="resetFilters('electricity')">重新設定</button>
                 </div>
                 <div class="stats-panel" id="elecStats" style="display:none !important;flex:1; min-width:300px;padding:12px 40px;align-items:center;"></div>

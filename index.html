@@ -2670,6 +2670,63 @@ body #tab-other .date-with-today .today-btn {
     body #tab-items .items-entry-grid .date-with-today .today-btn { display: inline-flex !important; }
 }
 </style>
+<style id="date-final-look">
+/* 【與「時來運轉」同款】電費／用品／灌溉三個模式的日期框
+   ① 跟其他輸入框一樣高（38px，不再扁扁的）
+   ② 日期文字上下置中、左右置中（手機版）
+   ③ 「今天」＝綠色小圓鈕，疊在框內右側，不會超出框外 */
+#tab-elec, #tab-items, #tab-other { --fld-h: 38px; }
+@media screen and (max-width: 768px) { #tab-items { --fld-h: 38px; } }
+
+body :is(#tab-elec, #tab-items, #tab-other) input[type="date"]:not(.edit-input):not(.edit-input):not(.edit-input),
+body :is(#tab-elec, #tab-items, #tab-other) input[type="time"]:not(.edit-input):not(.edit-input):not(.edit-input) {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    display: flex !important;              /* iPhone：用 flex 才能把日期文字真正垂直置中 */
+    align-items: center !important;
+    justify-content: center !important;
+    height: 38px !important;
+    min-height: 38px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    line-height: normal !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+}
+body input[type="date"]::-webkit-date-and-time-value,
+body input[type="time"]::-webkit-date-and-time-value {
+    text-align: center !important;
+    margin: 0 !important;
+}
+/* 手機：左右各留 62px（右邊是「今天」），日期才會落在整個框的正中央 */
+@media screen and (max-width: 768px) {
+    body :is(#tab-elec, #tab-items, #tab-other) .date-with-today input[type="date"]:not(.edit-input):not(.edit-input):not(.edit-input) {
+        padding-left: 62px !important;
+        padding-right: 62px !important;
+    }
+}
+/* 寬度：日期框、紀錄時間框都跟同欄其他輸入框一樣寬（不再有的窄 5px、有的窄一截） */
+body :is(#tab-elec, #tab-items, #tab-other) .date-with-today input[type="date"]:not(.edit-input):not(.edit-input):not(.edit-input),
+body #tab-other #bowelTime:not(.edit-input):not(.edit-input):not(.edit-input) {
+    width: 100% !important;
+}
+/* 「今天」按鈕：綠色小圓鈕，高度比框小 8px，垂直置中 */
+body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-btn.today-btn {
+    height: 30px !important;
+    min-width: 52px !important;
+    max-width: 60px !important;
+    padding: 0 10px !important;
+    right: 4px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    background: #8fa382 !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,.12) !important;
+}
+</style>
 </head>
 <body>
 

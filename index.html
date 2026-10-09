@@ -4193,14 +4193,14 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
             const avgPerWeek = (avgPerDay * 7).toFixed(1);
 
             // 標籤根據是否有篩選動態調整
-            const weekLabel = rangeDays <= 7 ? `所選範圍 共${rangeDays}天` : `所選範圍 近7天`;
+            const weekLabel = rangeDays <= 7 ? `所選範圍 共${rangeDays}天` : `所選範圍 最近7天`;
             const monthLabel = filterStartStr || filterEndStr ? `所選範圍 總計` : `所選範圍 本月次數`;
             const monthValueText = filterStartStr || filterEndStr ? `累計 ${totalInRange} 次` : `本月 ${thisMonthCount} 次 / 總計 ${totalInRange} 次`;
 
             statsPanel.innerHTML = `
                 <div class="stat-item"><span class="stat-label">${weekLabel}</span><span class="stat-value" style="text-align:center;padding-top:10px;">${thisWeekCount} 次</span></div>
                 <div class="stat-item"><span class="stat-label">${monthLabel}</span><span class="stat-value" style="text-align:center;padding-top:10px;">${monthValueText}</span></div>
-                <div class="stat-item"><span class="stat-label">所選範圍 週均</span><span class="stat-value" style="text-align:center;padding-top:10px;">每週 ${avgPerWeek} 次</span></div>
+                <div class="stat-item"><span class="stat-label">所選範圍 每週平均</span><span class="stat-value" style="text-align:center;padding-top:10px;">每週 ${avgPerWeek} 次</span></div>
             `;
         }
 

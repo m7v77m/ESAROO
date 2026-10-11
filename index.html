@@ -2736,11 +2736,11 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
 /* B-1 用品編輯列：品項分類（下拉）加寬，4 個字才顯示得完整 */
 html body #tab-items > table th:nth-child(2),
 html body #tab-items > table td:nth-child(2) {
-    min-width: 104px !important;
+    min-width: 132px !important;
 }
 html body #tab-items > table select.edit-input {
     width: 100% !important;
-    padding: 0 22px 0 8px !important;
+    padding: 0 2px 0 8px !important;
     font-size: 13px !important;
     text-overflow: clip !important;
 }
@@ -2844,6 +2844,24 @@ html body #tab-other td.bowel-note-cell {
     html body #tab-other > table tbody tr:has(.edit-input) td { padding-left: 1px !important; padding-right: 1px !important; }
     html body #tab-other > table tbody tr:has(.edit-input) td.action-cell { padding-left: 3px !important; padding-right: 3px !important; }
     html body #tab-other textarea.edit-input.bowel-note-box { padding: 0 4px !important; font-size: 12px !important; }
+}
+</style>
+
+<style id="v7-nav">
+/* 檔案／模式／檢視：字加大、左右間距加寬；標題太長時自動縮成「…」，不會把畫面撐出去 */
+@media screen and (max-width: 768px) {
+    html body .navbar { padding: 7px 8px !important; }
+    html body .navbar .nav-title {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    html body .navbar .nav-menu { flex: 0 0 auto !important; gap: 4px !important; }
+    html body .navbar .nav-btn {
+        font-size: 14px !important;
+        padding: 6px 13px !important;
+    }
 }
 </style>
 </head>

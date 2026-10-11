@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22central%22 text-anchor=%22middle%22 font-size=%2280%22>🐨</text></svg>">    <meta charset="UTF-8">
@@ -2727,6 +2727,125 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
     box-shadow: 0 2px 5px rgba(0,0,0,.12) !important;
 }
 </style>
+
+<style id="v6-fixes">
+/* ============================================================
+   V6：用品品項分類加寬、電費／灌溉編輯列框框高度、灌溉四欄均分、備註可換行
+   ============================================================ */
+
+/* B-1 用品編輯列：品項分類（下拉）加寬，4 個字才顯示得完整 */
+html body #tab-items > table th:nth-child(2),
+html body #tab-items > table td:nth-child(2) {
+    min-width: 104px !important;
+}
+html body #tab-items > table select.edit-input {
+    width: 100% !important;
+    padding: 0 22px 0 8px !important;
+    font-size: 13px !important;
+    text-overflow: clip !important;
+}
+
+/* C-1 / D-1 電費、灌溉編輯列的日期／時間框：跟用品編輯列的購買日期框一樣高、一樣的樣式 */
+html body :is(#tab-elec, #tab-other) > table input.edit-input:is([type="date"], [type="time"]) {
+    display: block !important;
+    width: calc(100% - 12px) !important;
+    min-width: 0 !important;
+    max-width: calc(100% - 12px) !important;
+    height: 28px !important;
+    min-height: 28px !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    padding: 0 6px !important;
+    font-size: 13px !important;
+    text-align: center;
+}
+html body #tab-elec > table th:nth-child(3),
+html body #tab-elec > table td:nth-child(3) { min-width: 150px; }
+html body #tab-elec > table input.edit-input[type="number"] {
+    height: 28px !important; cursor: pointer; text-align: center;
+}
+
+/* 灌溉備註：可換行的小框（點一下開視窗） */
+html body textarea.bowel-note-box {
+    display: block;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    white-space: pre;
+    font-family: inherit;
+    cursor: pointer;
+    box-sizing: border-box;
+    border: 1px solid var(--border-light);
+    background-color: var(--beige);
+    color: var(--text-main);
+    border-radius: 15px !important;
+    outline: none;
+}
+html body #tab-other #bowelNote.bowel-note-box {
+    height: var(--fld-h, 38px);
+    padding: 8px 10px;
+    font-size: 13px;
+    line-height: 20px;
+}
+html body #tab-other textarea.edit-input.bowel-note-box {
+    height: 28px !important;
+    min-height: 28px !important;
+    padding: 0 8px !important;
+    font-size: 13px !important;
+    line-height: 26px !important;
+    border: 1px solid var(--matcha);
+}
+html body #tab-other td.bowel-note-cell {
+    white-space: pre-wrap !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.45;
+}
+
+/* D-3 灌溉：發生日期、紀錄時間、備註內容、操作編輯 四欄均分（手機整張表縮進螢幕，不再疊擠） */
+@media screen and (max-width: 768px) {
+    html body #tab-other > table {
+        display: table !important;
+        table-layout: fixed !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: visible !important;
+        white-space: normal !important;
+    }
+    html body #tab-other > table thead { display: table-header-group !important; width: auto !important; min-width: 0 !important; }
+    html body #tab-other > table tbody { display: table-row-group !important; width: auto !important; min-width: 0 !important; }
+    html body #tab-other > table th,
+    html body #tab-other > table td {
+        width: 25% !important;
+        min-width: 0 !important;
+        max-width: none !important;
+        padding: 8px 3px !important;
+        font-size: 12px !important;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        box-sizing: border-box !important;
+    }
+    html body #tab-other > table td.action-cell { white-space: normal !important; }
+    html body #tab-other > table .btn-sm {
+        display: inline-block;
+        margin: 2px 1px !important;
+        padding: 4px 6px !important;
+        font-size: 12px !important;
+    }
+    html body #tab-other > table input.edit-input:is([type="date"], [type="time"]) {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 2px !important;
+        font-size: 10px !important;
+        padding: 0 !important;
+        letter-spacing: -0.4px;
+    }
+    /* 編輯列：左右內距收到 1px，日期框才有足夠寬度 */
+    html body #tab-other > table tbody tr:has(.edit-input) td { padding-left: 1px !important; padding-right: 1px !important; }
+    html body #tab-other > table tbody tr:has(.edit-input) td.action-cell { padding-left: 3px !important; padding-right: 3px !important; }
+    html body #tab-other textarea.edit-input.bowel-note-box { padding: 0 4px !important; font-size: 12px !important; }
+}
+</style>
 </head>
 <body>
 
@@ -2874,7 +2993,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
                         </div>
                         <div class="input-box" style="flex:1 1 150px; min-width:150px;">
                             <label>關鍵字串</label>
-                            <input type="text" id="itemFilterKeyword" placeholder="名稱、商家、備註、........." oninput="renderItems()">
+                            <input type="text" id="itemFilterKeyword" placeholder="類目名稱、購買商家、備註內容、........." oninput="renderItems()">
                         </div>
                         <button class="btn-reset" onclick="resetFilters('items')">重新設定</button>
                     </div>
@@ -3004,7 +3123,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
                 </div>
                 <div class="input-box" style="flex-grow:1; max-width:600px;">
                     <label>備註內容</label>
-                    <input type="text" id="bowelNote" placeholder="一短一長、大小顆粒、腹痛腹瀉、.........">
+                    <textarea id="bowelNote" class="bowel-note-box" rows="1" readonly placeholder="一短一長、大小顆粒、腹痛腹瀉、........." title="點一下開啟編輯視窗（可換行）" onclick="openBowelNoteEditor('bowelNote')" onkeydown="if(event.key==='Enter'){event.preventDefault();openBowelNoteEditor('bowelNote');}"></textarea>
                 </div>
                 <button class="btn-add" onclick="addBowel()">新增紀錄</button>
             </div>
@@ -3566,12 +3685,23 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
             const ph = label === '商品名稱' ? '例如: 五月花/厚棒/連續抽取式/衛生紙/永豐餘' : '例如: 全聯福利中心/二中店';
             openTextEditor(inputId, label, ph);
         }
-        function openTextEditor(inputId, label, placeholder) {
+        let noteEditorOpts = {};
+        // 電費：電錶度數也用同一個視窗（只收數字）
+        function openElecValueEditor() {
+            openTextEditor('editElecValue', '電錶度數', '例如: 18927.5', { numeric: true });
+        }
+        // 灌溉：備註內容用同一個視窗，而且可以換行
+        function openBowelNoteEditor(inputId) {
+            openTextEditor(inputId, '備註內容', '例如: 一短一長、大小顆粒、腹痛腹瀉', { multiline: true });
+        }
+        function openTextEditor(inputId, label, placeholder, opts) {
             const input = document.getElementById(inputId);
             const modal = document.getElementById('elecNoteEditorModal');
             const ta = document.getElementById('elecNoteEditorText');
             if (!input || !modal || !ta) return;
             noteEditorTargetId = inputId;
+            noteEditorOpts = opts || {};
+            ta.setAttribute('inputmode', noteEditorOpts.numeric ? 'decimal' : 'text');
             const title = document.getElementById('elecNoteEditorTitle');
             if (title) title.textContent = '✏️ 編輯' + label;
             ta.placeholder = placeholder || '';
@@ -3583,8 +3713,19 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
         function confirmElecNoteEditor() {
             const input = document.getElementById(noteEditorTargetId);
             const ta = document.getElementById('elecNoteEditorText');
-            // 單行備註：換行一律轉成空白
-            if (input && ta) input.value = ta.value.replace(/[\r\n]+/g, ' ');
+            if (input && ta) {
+                if (noteEditorOpts.numeric) {
+                    // 度數：只留數字、小數點、負號；不是數字就維持原值
+                    const v = ta.value.replace(/[^\d.\-]/g, '');
+                    if (v !== '' && !isNaN(parseFloat(v))) input.value = v;
+                } else if (noteEditorOpts.multiline) {
+                    // 可換行的備註：換行照樣存起來
+                    input.value = ta.value.replace(/\r\n?/g, '\n');
+                } else {
+                    // 單行備註：換行一律轉成空白
+                    input.value = ta.value.replace(/[\r\n]+/g, ' ');
+                }
+            }
             closeElecNoteEditor();
         }
         function closeElecNoteEditor() {
@@ -3751,7 +3892,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
                             <td style="text-align:center;">-</td>
                             <td style="text-align:center;"><input type="text" id="editElecSerial" value="${rec.serial || ''}" class="edit-input" maxlength="2" style="text-align:center;" onblur="if(this.value) this.value = this.value.padStart(2, '0')"></td>
                             <td><div style="display:flex; gap:4px;"><input type="date" id="editElecDate" value="${rec.date}" class="edit-input"></div></td>
-                            <td><input type="number" id="editElecValue" value="${rec.value}" step="0.1" class="edit-input"></td>
+                            <td><input type="number" id="editElecValue" value="${rec.value}" step="0.1" class="edit-input" readonly placeholder="點一下開啟編輯視窗" title="點一下開啟編輯視窗" style="cursor:pointer;" onclick="openElecValueEditor()" onkeydown="if(event.key==='Enter'){event.preventDefault();openElecValueEditor();}"></td>
                             <td>-</td><td>-</td>
                             <td><input type="text" id="editElecNote" value="${rec.note || ''}" class="edit-input" readonly placeholder="點一下開啟編輯視窗" title="點一下開啟編輯視窗" style="cursor:pointer;" onclick="openElecNoteEditor()" onkeydown="if(event.key==='Enter'){event.preventDefault();openElecNoteEditor();}"></td>
                             <td class="action-cell">
@@ -4076,6 +4217,10 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
         }
         
 
+        function escHtml(t) {
+            return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
         function renderBowel() {
             const tbody = document.getElementById('bowelTableBody');
             tbody.innerHTML = '';
@@ -4115,7 +4260,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
                         <tr style="background-color: var(--milk-tea-pale);">
                             <td><input type="date" id="editBowelDate" value="${rec.date}" class="edit-input"></td>
                             <td><input type="time" id="editBowelTime" value="${normTime(rec.time)}" step="60" class="edit-input"></td>
-                            <td><input type="text" id="editBowelNote" value="${rec.note || ''}" class="edit-input"></td>
+                            <td><textarea id="editBowelNote" class="edit-input bowel-note-box" rows="1" readonly placeholder="點一下開啟編輯視窗" title="點一下開啟編輯視窗（可換行）" onclick="openBowelNoteEditor('editBowelNote')" onkeydown="if(event.key==='Enter'){event.preventDefault();openBowelNoteEditor('editBowelNote');}">${escHtml(rec.note)}</textarea></td>
                             <td class="action-cell">
                                 <button class="btn-sm btn-save" onclick="saveEditBowel(${rec.id})">儲存</button>
                                 <button class="btn-sm btn-cancel" onclick="cancelEdit()">取消</button>
@@ -4128,7 +4273,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
                             <!-- 顯示日期與星期 -->
                             <td>${rec.date} ${weekday}</td>
                             <td>${normTime(rec.time)}</td>
-                            <td>${rec.note || '-'}</td>
+                            <td class="bowel-note-cell">${escHtml(rec.note) || '-'}</td>
                             <td class="action-cell">
                                 <button class="btn-sm btn-edit" onclick="startEdit('bowel', ${rec.id})">編輯</button>
                                 <button class="btn-sm btn-delete" onclick="deleteRecord('bowel', ${rec.id})">刪除</button>
@@ -4267,7 +4412,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn.today-bt
     <script>
         // 建立飄落小熊的魔法陣
         function createRilakkuma() {
-            const icons = ['🪷','🧚','🐨','🎋']; // 飄落的拉拉熊、小黃雞、草莓小熊
+            const icons = ['🪷','🧚','🐨','🌿']; // 飄落的拉拉熊、小黃雞、草莓小熊
             const flake = document.createElement('div');
             
             flake.className = 'rilakkuma-flake';
@@ -4630,6 +4775,11 @@ input[type="checkbox"] {
             if (inp.disabled) continue;
             const r = inp.getBoundingClientRect();
             if (r.width === 0 || r.height === 0) continue;
+            /* 日期框本身不收點擊，所以「真的點到它」時，e.target 會是它外面那一層。
+               如果點到的是別的東西（下拉選單、彈出視窗、按鈕…），就算座標剛好疊在日期框上也不能叫月曆 */
+            const host = inp.parentElement;
+            if (e.target !== inp && !(host && host.contains(e.target))) continue;
+            if (e.target.closest && e.target.closest('button, a, select, textarea, .modal-overlay, .dropdown-content')) continue;
             if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom){
                 e.preventDefault();
                 open(inp);

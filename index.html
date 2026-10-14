@@ -4953,6 +4953,30 @@ input[type="checkbox"] {
     border-style: solid !important; /* 卡片大外框強制維持實線，不被影響 */
 }
 </style>
+<!-- 貼在 </body> 正上方，強制讓分類篩選標籤在手機上恢復成四行 -->
+<style>
+@media screen and (max-width: 768px) {
+    /* 1. 強制讓裝標籤的容器變成四等分網格 */
+    #itemFilterTags.tag-container {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important; /* 完美平分四等分 */
+        gap: 7px 7px !important; /* 微調上下與左右的縫隙 */
+        width: 100% !important;
+    }
+
+    /* 2. 微調每個小標籤裡面的字體與左右內距，確保排成四行時不會擠爆換行 */
+    #itemFilterTags .filter-tag {
+        padding: 7px 7px !important; /* 收緊左右空白 */
+        font-size: 10.5px !important; /* 微調字體大小，讓四個字能完美塞進格子 */
+        text-align: center !important;
+        white-space: nowrap !important; /* 規定文字絕對不自己斷行 */
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+</style>
+
 
 </body>
 </html>

@@ -804,15 +804,15 @@ table:has(#bowelTableBody) td {
 }
 
 
-/* ：間格寬度一致等寬 - 上下左右紅框都一樣12px */
+/* 子晴：間格寬度一致等寬 - 上下左右紅框都一樣12px */
 #tab-items.tab-content {
     padding: 12px !important; /* 外框12px */
     box-sizing: border-box !important;
 }
 
 #tab-items .top-controls-wrapper {
-    gap: 12px !important; /* 左右卡片之間12px = 中間直紅框 */
-    margin-bottom: 12px !important; /* 卡片與表格之間12px = 橫紅框 */
+    gap: 12px !important; /* 左右卡片之間12px = 子晴中間直紅框 */
+    margin-bottom: 12px !important; /* 卡片與表格之間12px = 子晴橫紅框 */
     padding: 0 !important;
     width: 100% !important;
     box-sizing: border-box !important;
@@ -841,13 +841,13 @@ table:has(#bowelTableBody) td {
     table-layout: fixed !important;
 }
 
-/* 表格欄位等寬 - 要的等寬 */
+/* 表格欄位等寬 - 子晴要的等寬 */
 #tab-items > table th,
 #tab-items > table td {
     box-sizing: border-box !important;
 }
 
-/* 如果想要表格欄位也等寬，7個欄位平均 */
+/* 如果子晴想要表格欄位也等寬，7個欄位平均 */
 #tab-items > table th:nth-child(1),
 #tab-items > table td:nth-child(1) { width: 40px !important; } /* checkbox */
 #tab-items > table th:nth-child(2),
@@ -884,26 +884,26 @@ table:has(#bowelTableBody) td {
 }
 
 
-/* 專用：只要改一個數字，全部縫隙一起變！ */
+/* 子晴專用：只要改一個數字，全部縫隙一起變！ */
 :root {
-    --縫隙: 12px; /* 改這裡！10px緊，12px剛好，16px鬆 */
+    --子晴縫隙: 12px; /* 改這裡！10px緊，12px剛好，16px鬆 */
 }
 
 #tab-items.tab-content {
-    padding: var(--縫隙) !important;
+    padding: var(--子晴縫隙) !important;
 }
 
 #tab-items .top-controls-wrapper {
-    gap: var(--縫隙) !important;
-    margin-bottom: var(--縫隙) !important;
+    gap: var(--子晴縫隙) !important;
+    margin-bottom: var(--子晴縫隙) !important;
 }
 
 #tab-items .search-panel.tab-search-panel {
-    max-width: calc(58% - var(--縫隙)/2) !important;
+    max-width: calc(58% - var(--子晴縫隙)/2) !important;
 }
 
 #tab-items .batch-panel {
-    max-width: calc(42% - var(--縫隙)/2) !important;
+    max-width: calc(42% - var(--子晴縫隙)/2) !important;
 }
 
 /* 表格也跟著對齊 */
@@ -913,7 +913,7 @@ table:has(#bowelTableBody) td {
 }
 
 
-/* === 最終版：全部縫隙跟拉拉熊收進褲袋版記帳本一樣等距 === */
+/* === 子晴最終版：全部縫隙跟拉拉熊收進褲袋版記帳本一樣等距 === */
 /* 拉拉熊版原本設定： */
 /* .main-container padding: 15px 15px; */
 /* .top-controls-wrapper gap: 15px; margin-bottom: 15px; */
@@ -921,17 +921,17 @@ table:has(#bowelTableBody) td {
 /* 為了等距，龍寶統一成 15px，跟記帳本視覺一樣 */
 
 :root {
-    --縫隙-拉拉熊版: 15px; /* 拉拉熊版原本是15px上下 + 15px左右，統一後用15px最像 */
+    --子晴縫隙-拉拉熊版: 15px; /* 拉拉熊版原本是15px上下 + 15px左右，統一後用15px最像 */
 }
 
 #tab-items.tab-content {
-    padding: var(--縫隙-拉拉熊版) !important;
-    gap: var(--縫隙-拉拉熊版) !important;
+    padding: var(--子晴縫隙-拉拉熊版) !important;
+    gap: var(--子晴縫隙-拉拉熊版) !important;
 }
 
 #tab-items .top-controls-wrapper {
-    gap: var(--縫隙-拉拉熊版) !important; /* 左右15px = 拉拉熊版 */
-    margin-bottom: var(--縫隙-拉拉熊版) !important; /* 上下15px = 拉拉熊版 */
+    gap: var(--子晴縫隙-拉拉熊版) !important; /* 左右15px = 拉拉熊版 */
+    margin-bottom: var(--子晴縫隙-拉拉熊版) !important; /* 上下15px = 拉拉熊版 */
     padding: 0 !important;
 }
 
@@ -949,7 +949,7 @@ table:has(#bowelTableBody) td {
 }
 
 
-/* === 修復：消除6個紅框突出角 + 套用選項等寬 === */
+/* === 子晴修復：消除6個紅框突出角 + 套用選項等寬 === */
 
 /* 消除左右上下突出小白角 */
 .main-container,
@@ -1006,20 +1006,20 @@ button[onclick="openCategoryModal()"] {
     width: 100% !important;
 }
 
-/* 全部縫隙15px等距 - 已改 */
+/* 全部縫隙15px等距 - 子晴已改 */
 :root {
-    --縫隙: 15px;
+    --子晴縫隙: 15px;
 }
 
 
-/* === 要求：網頁所有圓角統一 === */
+/* === 子晴要求：網頁所有圓角統一 === */
 
 :root {
     --radius-sm: 15px !important;
     --radius-md: 15px !important;
     --radius-lg: 15px !important;
     --radius-full: 15px !important;
-    --圓角: 15px !important;
+    --子晴圓角: 15px !important;
 }
 
 /* 強制所有卡片、輸入框、按鈕、表格都用15px圓角 */
@@ -1096,8 +1096,8 @@ table {
 #tab-electricity .top-controls-wrapper,
 #tab-items .top-controls-wrapper,
 .top-controls-wrapper {
-    gap: 15px !important; /* 左右縫隙15px - 紅色直線 */     
-    margin-bottom: 15px !important; /* 上下縫隙15px - 紅色橫線 */
+    gap: 15px !important; /* 左右縫隙15px - 子晴紅色直線 */     
+    margin-bottom: 15px !important; /* 上下縫隙15px - 子晴紅色橫線 */
     row-gap: 15px !important;
     column-gap: 15px !important;
     padding: 0 !important;
@@ -2988,7 +2988,7 @@ html body #tab-other td.bowel-note-cell {
         <div id="tab-items" class="tab-content">
             <!-- 套用 top-controls-wrapper 讓三個區塊水平排列在同一列 -->
             
-            <!-- 套用 top-controls-wrapper 讓三個區塊水平排列在同一列 - 紅框模板修復版 -->
+            <!-- 套用 top-controls-wrapper 讓三個區塊水平排列在同一列 - 子晴紅框模板修復版 -->
             <div class="top-controls-wrapper" style="display:flex; gap:12px; margin-bottom:12px; align-items:flex-start; flex-wrap:wrap;">
                 
                 <!-- 1. 搜尋面板 - 左邊 -->
@@ -4455,8 +4455,8 @@ html body #tab-other td.bowel-note-cell {
             }, duration * 1000);
         }
 
-        // 每 1000 毫秒（約1秒）自動誕生一隻可愛的拉拉熊
-        setInterval(createRilakkuma, 1000);
+        // 每 2000 毫秒（約2秒）自動誕生一隻可愛的拉拉熊
+        setInterval(createRilakkuma, 2000);
     </script>
     <!-- 🐨 拉拉熊浪漫飄落特效結束 🐨 -->
 
@@ -4872,41 +4872,85 @@ input[type="checkbox"] {
     document.addEventListener('visibilitychange', () => { if (!document.hidden) importPending(); });
 })();
 </script>
-<!-- 貼在 </body> 正上方，將所有模式最內層的小輸入框與按鈕改為虛線框 -->
+<!-- 貼在 </body> 正上方，強制讓電費按鈕吃滿寬度對齊紅線 -->
 <style>
-/* 1. 【通用】將三個模式裡最內層的所有輸入框（文字、日期、數字、下拉選單、備註框）全部改成虛線框 */
-input[type="text"],
-input[type="date"],
-input[type="number"],
-input[type="time"],
-select,
-textarea.bowel-note-box {
-    border: 1px dashed var(--border-light) !important; /* 1px 細緻的奶茶色虛線 */
+/* 強制讓電費搜尋面板裡的所有小按鈕在手機上都 100% 吃滿寬度 */
+@media screen and (max-width: 768px) {
+    #tab-elec .search-panel.tab-search-panel button,
+    #tab-elec .search-panel.tab-search-panel .btn-sm {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        margin-left: 0 !important; /* 消除原本向左推的空白 */
+        margin-right: 0 !important;
+    }
+}
+</style>
+<!-- 貼在 </body> 正上方，無尾熊專屬指定內層小項目虛線邊框魔法 -->
+<style>
+/* ============================================================
+   ⚡ Ａ．電費模式：指定小框框換虛線
+   ============================================================ */
+/* 起始日期、結束日期、關鍵字串、序號、紀錄日期、電錶度數、備註內容 */
+#tab-elec input[type="date"],
+#tab-elec input[type="text"],
+#tab-elec input[type="number"] {
+    border: 1px dashed #E8D5C4 !important; /* 溫柔的細奶茶色虛線 */
 }
 
-/* 2. 【通用】當滑鼠點擊點入輸入框（聚焦）時，依然維持漂亮的綠色虛線外圍發光 */
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--border-focus) !important;
+/* ============================================================
+   🛒 Ｂ．用品模式：指定小項目與統計換虛線
+   ============================================================ */
+/* 分類篩選所有的小項目分類（未選中的灰色標籤與選中的綠色標籤） */
+#itemFilterTags .filter-tag {
+    border: 1.5px dashed #C4956A !important; /* 奶茶色虛線 */
+}
+#itemFilterTags .filter-tag.active {
+    border: 1.5px dashed #FFFFFF !important; /* 選中的抹茶綠標籤改用白色虛線襯托，更可愛 */
 }
 
-/* 3. 【加碼可愛】把所有大大小小的按鈕（包含今天、新增紀錄、重新設定等）邊框也一起變成虛線 */
-button,
-.btn-sm,
-.btn-add,
-.btn-reset,
-.btn-save,
-.filter-tag {
-    border: 1px dashed var(--border-light) !important;
+/* 起始日期、結束日期、關鍵字串、尚未分類(下拉)、品項分類(下拉)、商品名稱、購買日期、最終日期、商家平台 */
+#tab-items select,
+#tab-items input[type="date"],
+#tab-items input[type="text"] {
+    border: 1.5px dashed #C4956A !important;
 }
 
-/* 4. 【守護原本設定】確保中卡片（搜尋面板、輸入面板）與大卡片（最外層）依然維持原本的實線外框 */
+/* 已使用項目 平均天數 ＋ 已使用項目 採計筆數（右側最上方的統計綠框） */
+#itemStats.stats-panel {
+    border: 1.5px dashed #7BA05B !important; /* 漂亮的抹茶綠虛線 */
+}
+
+
+/* ============================================================
+   💩 Ｃ．灌溉模式：指定小項目與統計換虛線
+   ============================================================ */
+/* 起始日期、結束日期、關鍵字串、發生日期、紀錄時間 */
+#tab-other input[type="date"],
+#tab-other input[type="text"],
+#tab-other input[type="time"] {
+    border: 1.5px dashed #E8D5C4 !important;
+}
+
+/* 備註內容（因為灌溉備註是個特別的點擊小框框 textarea） */
+#tab-other textarea.bowel-note-box {
+    border: 1.5px dashed #C4956A !important;
+}
+
+/* 所選範圍 最近7天 ＋ 本月次數 ＋ 每週平均（灌溉模式的統計綠框） */
+#tab-other #bowelStats.stats-panel {
+    border: 1.5px dashed #C4956A !important; /* 抹茶綠虛線 */
+}
+
+
+/* ============================================================
+   🧚 完美保留：確保大卡片、中卡片外框依然是漂亮的實線
+   ============================================================ */
 .search-panel,
 .batch-panel,
-.stats-panel,
 .tab-content {
-    border-style: solid !important; /* 強制留住實線外框，絕不亂變 */
+    border-style: solid !important; /* 卡片大外框強制維持實線，不被影響 */
 }
 </style>
 

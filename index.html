@@ -3003,21 +3003,21 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="stats-panel" id="elecStats" style="display:none !important;flex:1; min-width:300px;padding:12px 40px;align-items:center;"></div>
             </div>
 
-           <div class="batch-panel" id="elecSelectionPanel" style="display:none; margin-bottom:12px; padding:8px 15px; display: flex; align-items: center; flex-wrap: wrap;">
-    <span class="batch-title">✅ 已選取統計：</span>
-    <span style="font-size:13px; color:var(--text-light);">已選項目 <strong id="selElecCount">0</strong> 筆</span>
-    <span style="font-size:13px; color:var(--text-light);">｜產生單度：<strong id="selElecKwh">0.00</strong> 度</span>
-    <span style="font-size:13px; color:var(--danger); font-weight:600;">｜產生單額：<strong id="selElecCost">0.00</strong> 元</span>
-    <span style="font-size:13px; color:var(--text-light);">｜平均單度：<strong id="selElecAvgKwh">0.00</strong> 度</span>
-    <span style="font-size:13px; color:var(--danger); font-weight:600;">｜平均單電：<strong id="selElecAvgCost">0.00</strong> 元</span>
-    <span style="font-size:13px; color:var(--text-light);">｜電費週期：<strong id="selElecPeriod">0</strong> 天</span>
-    <span style="font-size:13px; color:var(--danger); font-weight:600;">｜電費總額：<strong id="selElecNoteCost">0</strong> 元</span>
-    <span style="font-size:13px; color:var(--text-light);">｜電費平均：<strong id="selElecNoteAvg">0.00</strong> 元</span>
-    
-    <!-- 終極縮小按鈕（已經把舊的刪除囉！） -->
-    <button class="btn-sm btn-save" style="margin-left: 52px; width: max-content !important; flex-grow: 0 !important; flex-shrink: 0 !important;" onclick="autoFillSerial()">自 動 依 序 編 號</button>
+                              <div class="batch-panel" id="elecSelectionPanel" style="display:none; margin-bottom:12px; padding:10px 15px;">
+    <div style="font-weight: 600; font-size: 13px; color: var(--matcha-dark); margin-bottom: 4px; width: 100%;">✅ 已選取統計：</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 4px 6px; width: 100%; align-items: center; justify-content: flex-start; text-align: left;">
+        <span style="font-size:13px; color:var(--text-light); white-space: nowrap; display: inline-block;">｜已選項目 <strong id="selElecCount">0</strong> 筆</span>
+        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜電費總額：<strong id="selElecNoteCost">0</strong> 元</span>
+        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜平均單度：<strong id="selElecAvgKwh">0.00</strong> 度</span>
+        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜產生單額：<strong id="selElecCost">0.00</strong> 元</span>
+        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜電費週期：<strong id="selElecPeriod">0</strong> 天</span>
+        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜平均單電：<strong id="selElecAvgCost">0.00</strong> 元</span>
+        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜產生單度：<strong id="selElecKwh">0.00</strong> 度</span>
+        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜電費平均：<strong id="selElecNoteAvg">0.00</strong> 元</span>
+        <!-- 💡 魔法小跟班：取消 100% 限制，讓它像磁鐵一樣，精準吸到電費平均的右邊！ -->
+        
+    </div>
 </div>
-
 
             <div class="form-group">
                 <div class="input-box" style="width:60px;">
@@ -3032,13 +3032,15 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                     <label>電錶度數</label>
                     <input type="number" id="elecValue" step="0.1">
                 </div>
-                <div class="input-box" style="flex-grow:1; max-width:250px;">
-                    <label>備註內容</label>
-                    <input type="text" id="elecNote" placeholder="5元*尚餘30天=150元+前天度數18729=18879度">
-                </div>
-                <button class="btn-add" onclick="addElectricity()">新增紀錄</button>
-            </div>
+                             <div class="input-box" style="flex-grow:1; max-width:250px;">
+                 <label>備註內容</label>
+                 <input type="text" id="elecNote" placeholder="5元*尚餘30天=150元+前天度數18729=18879度">
+             </div>
+             <button class="btn-add" onclick="addElectricity()">新增紀錄</button>
+             <button class="btn-sm btn-save" id="btnAutoSerial" onclick="autoFillSerial()">自動編號</button>
+         </div>
 		</div>
+		
     	<!-- ▲ 新增浮動容器包覆結束 ▲ -->
             <table>
                 <thead>
@@ -5179,5 +5181,83 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
   });
 })();
 </script>
+
+<!-- 貼在 </body> 正上方，強制用品框小圓角 8px 與自動編號樣式 -->
+<style>
+/* 1. 徹底消滅頑固的大圓角，強制將用品統計框設定為 8px 圓角 */
+html body #itemStats.stats-panel,
+html body #tab-items .items-stats {
+    border-radius: 14px !important;
+}
+
+/* 2. 將自動編號按鈕徹底變身：跟新增紀錄同款寬度、高質感深奶茶底色與白色字 */
+html body #btnAutoSerial,
+html body .btn-sm.btn-save#btnAutoSerial {
+    display: block !important;
+    width: 100% !important;   /* 手機上吃滿寬度 */
+    height: 38px !important;
+    line-height: 36px !important;
+    padding: 0 18px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #FFFFFF !important;
+    background-color: #C4956A !important; /* 專屬深奶茶色 */
+    border: 1px solid transparent !important;
+    border-radius: 15px !important; /* 與新增紀錄按鈕圓角一致 */
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    margin-top: 8px !important;   /* 與上方新增紀錄按鈕拉開一點點點優雅間距 */
+    margin-bottom: 5px !important;
+}
+</style>
+<!-- 貼在 </body> 正上方，收緊自動編號按鈕的上下間距 -->
+<style>
+/* 精準控制自動編號按鈕的上下間距，消除空曠感 */
+html body #btnAutoSerial,
+html body .btn-sm.btn-save#btnAutoSerial {
+    margin-top: 1.6px !important;    /* 縮小與上方「新增紀錄」按鈕的距離 */
+    margin-bottom: 1.6px !important; /* 縮小與下方「明細列表」的距離 */
+}
+
+/* 順便微調新增紀錄按鈕的下邊距，讓兩顆按鈕貼得更緊密、更對齊 */
+html body .btn-add {
+    margin-bottom: 0px !important;
+}
+</style>
+<!-- 貼在 </body> 正上方，大發神威！全面收緊所有指定按鈕的上下間距 -->
+<style>
+/* ============================================================
+   ⚡ 1. 電費模式（及通用搜尋面板）：收緊三顆大按鈕的上下縫隙
+   ============================================================ */
+@media screen and (max-width: 768px) {
+    /* 調整「只查看含電費」、「全選篩選結果」與「重新設定」的間距 */
+    html body .search-panel > .btn-sm,
+    html body .search-panel > .btn-save,
+    html body .search-panel > .btn-reset {
+        margin-top: 1.6px !important;    /* 上方距離縮小 */
+        margin-bottom: 1.6px !important; /* 下方距離縮小 */
+        height: 38px !important;       /* 確保高度與其他輸入框完美一致 */
+    }
+    
+    /* 順便微調關鍵字串輸入框的下邊距，讓它跟第一顆按鈕貼得更緊密 */
+    html body .search-panel .input-box {
+        margin-bottom: 1.6px !important;
+    }
+}
+
+/* ============================================================
+   🛒 2. 用品模式：收緊「套用選項」按鈕的上下縫隙
+   ============================================================ */
+@media screen and (max-width: 768px) {
+    /* 精準鎖定用品頁右側的「套用選項」按鈕，消除它的上下空曠感 */
+    html body #tab-items .batch-panel button[onclick="batchUpdateCategory()"] {
+        margin-top: 1.8px !important;    /* 縮小與上方「批次分類下拉選單」的距離 */
+        margin-bottom: 1.8px !important; /* 縮小與下方「管理分類」按鈕的距離 */
+    }
+}
+</style>
+
 </body>
 </html>

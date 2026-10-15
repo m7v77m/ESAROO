@@ -2929,6 +2929,11 @@ html body #itemFilterTags .filter-tag {
 }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style id="v10-cat-lines">
+/* 用品列表：同分類之間＝虛線，不同分類之間＝實線 */
+html body #itemTableBody td { border-bottom: 1px dashed #D4B896 !important; }
+html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !important; }
+</style>
 </head>
 <body>
 
@@ -4182,7 +4187,7 @@ html body #itemFilterTags .filter-tag {
                 const isEditing = (editState.category === 'items' && editState.id === item.id);
                 let rowStyle = "";
                 if (index > 0 && item.category !== prevCategory) {
-                    rowStyle = "border-top: 2px dashed var(--milk-tea-light);";
+                    rowStyle = "border-top: 2px solid #D4B896;";
                 }
                 prevCategory = item.category;
                 const displayCategory = item.category || '尚未分類';
@@ -4933,7 +4938,7 @@ input[type="checkbox"] {
         localStorage.removeItem(QUEUE_KEY);
         if (added > 0) {
             saveData();
-            toast('🔄 已從時來運轉同步 ' + added + ' 筆用品' + (uncat ? '（' + uncat + ' 筆待分類）' : ''));
+            if (uncat) toast('🔄 已同步 ' + added + ' 筆用品（' + uncat + ' 筆待分類）');   // 全部自動分類成功就不打擾
         }
     }
 

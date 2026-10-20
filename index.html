@@ -2936,12 +2936,16 @@ html body #itemFilterTags .filter-tag {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style id="elec-analytics-css">
 /* 電費統計：每月週期、趨勢圖、月份快選 */
-.ea-wrap { margin-top: 15px; padding: 12px; background: var(--beige); border: 1px dashed #8fa382; border-radius: 15px; }
-.ea-title { font-weight: 700; font-size: 14px; color: var(--matcha-dark); margin-bottom: 8px; line-height: 1.5; }
+.ea-wrap { margin: 0 0 15px 0; padding: 12px; background: var(--beige); border: 1.5px solid #8fa382; border-radius: 15px; }
+.ea-title { font-weight: 700; font-size: 14px; color: var(--matcha-dark); margin-bottom: 8px; line-height: 1.5; cursor: pointer; user-select: none; }
+.ea-caret { display: inline-block; width: 14px; transition: transform .15s; }
+.ea-wrap.ea-collapsed .ea-caret { transform: rotate(-90deg); }
+.ea-wrap.ea-collapsed > :not(.ea-title):not(#elecSelectionPanel) { display: none !important; }
+.ea-wrap.ea-collapsed .ea-title { margin-bottom: 0; }
 .ea-sub { font-weight: 400; font-size: 11px; color: var(--text-muted); }
 .ea-block-title { font-weight: 600; font-size: 13px; color: var(--milk-tea-dark); margin: 14px 0 6px; }
 .ea-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
-.ea-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 8px 6px; background: var(--matcha-pale); border: 1px solid var(--matcha-light); border-radius: 15px; text-align: center; }
+.ea-card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 8px 6px; background: var(--matcha-pale); border: 1.5px dashed #8fa382; border-radius: 15px; text-align: center; }
 .ea-card-label { font-size: 11px; color: var(--text-light); line-height: 1.3; }
 .ea-card-val { font-size: 16px; font-weight: 700; color: var(--matcha-dark); }
 .ea-card-sub { font-size: 10px; color: var(--text-muted); }
@@ -3019,6 +3023,53 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
         <!--  TAB : 電費預估                                              -->
         <!-- ============================================================ -->
         <div id="tab-elec" class="tab-content active">
+            <!-- ===== 電費統計：依備註切出的每月抄表週期 ===== -->
+            <div id="elecAnalytics" class="ea-wrap">
+                <div class="ea-title" onclick="toggleElecAnalytics()" title="點一下收合／展開"><span class="ea-caret" id="eaCaret">▾</span> 📊 電費統計 <span class="ea-sub">（每月週期＝備註「N月→第1天」到「N月→電費X元」；勾選明細會在這裡顯示已選取統計）</span></div>
+                <div class="ea-cards" id="eaCards"></div>
+
+                     <div class="batch-panel" id="elecSelectionPanel" style="display:none; margin:10px 0 0 0; padding:10px 15px;">
+    <div style="font-weight: 600; font-size: 13px; color: var(--matcha-dark); margin-bottom: 4px; width: 100%;">✅ 已選取統計：</div>
+    <div style="display: flex; flex-wrap: wrap; gap: 4px 6px; width: 100%; align-items: center; justify-content: flex-start; text-align: left;">
+        <span style="font-size:13px; color:var(--text-light); white-space: nowrap; display: inline-block;">｜已選項目 <strong id="selElecCount">0</strong> 筆</span>
+        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜總計電費：<strong id="selElecNoteCost">0</strong> 元</span>         
+        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜產生幾度：<strong id="selElecKwh">0.00</strong> 度</span>
+        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜產生電費：<strong id="selElecCost">0.00</strong> 元</span>
+        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜日均幾度：<strong id="selElecAvgKwh">0.00</strong> 度</span>
+        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜日均電費：<strong id="selElecAvgCost">0.00</strong> 元</span> 
+        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜已選週期：<strong id="selElecPeriod">0</strong> 天</span>
+        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜週期電均：<strong id="selElecNoteAvg">0.00</strong> 元</span>
+        <!-- 💡 魔法小跟班：取消 100% 限制，讓它像磁鐵一樣，精準吸到電費平均的右邊！ -->
+        
+    </div>
+</div>
+
+
+                <div class="ea-block-title">📈 每月電費與日均度數趨勢</div>
+                <div class="ea-legend"><span><i class="ea-dot ea-dot-bar"></i>每月電費（元）</span><span><i class="ea-dot ea-dot-line"></i>日均度數</span><span><i class="ea-dot ea-dot-prog"></i>進行中（預估）</span></div>
+                <div id="eaChart" class="ea-chart"></div>
+
+                <div class="ea-block-title">🗓️ 每月週期統計表（點一列可篩選該月明細）</div>
+                <div class="ea-scroll">
+                    <table class="ea-table">
+                        <thead>
+                            <tr>
+                                <th>月份</th>
+                                <th>週期區間</th>
+                                <th>週期天數</th>
+                                <th>每月度數</th>
+                                <th>每月電費</th>
+                                <th>日均度數</th>
+                                <th>日均電費</th>
+                                <th>較上月度數</th>
+                                <th style="min-width:100px;">日均趨勢</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eaCycleBody"></tbody>
+                    </table>
+                </div>
+                <div class="ea-note" id="eaNote"></div>
+            </div>
         <!-- ▼ 新增浮動容器包覆開始 ▼ -->
     	<div class="sticky-header-container">
             <div class="top-controls-wrapper">
@@ -3044,21 +3095,6 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="stats-panel" id="elecStats" style="display:none !important;flex:1; min-width:300px;padding:12px 40px;align-items:center;"></div>
             </div>
 
-                     <div class="batch-panel" id="elecSelectionPanel" style="display:none; margin-bottom:12px; padding:10px 15px;">
-    <div style="font-weight: 600; font-size: 13px; color: var(--matcha-dark); margin-bottom: 4px; width: 100%;">✅ 已選取統計：</div>
-    <div style="display: flex; flex-wrap: wrap; gap: 4px 6px; width: 100%; align-items: center; justify-content: flex-start; text-align: left;">
-        <span style="font-size:13px; color:var(--text-light); white-space: nowrap; display: inline-block;">｜已選項目 <strong id="selElecCount">0</strong> 筆</span>
-        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜總計電費：<strong id="selElecNoteCost">0</strong> 元</span>         
-        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜產生幾度：<strong id="selElecKwh">0.00</strong> 度</span>
-        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜產生電費：<strong id="selElecCost">0.00</strong> 元</span>
-        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜日均幾度：<strong id="selElecAvgKwh">0.00</strong> 度</span>
-        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜日均電費：<strong id="selElecAvgCost">0.00</strong> 元</span> 
-        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜已選週期：<strong id="selElecPeriod">0</strong> 天</span>
-        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜週期電均：<strong id="selElecNoteAvg">0.00</strong> 元</span>
-        <!-- 💡 魔法小跟班：取消 100% 限制，讓它像磁鐵一樣，精準吸到電費平均的右邊！ -->
-        
-    </div>
-</div>
 
             <div class="form-group">
                 <div class="input-box" style="width:60px;">
@@ -3099,36 +3135,6 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <tbody id="elecTableBody"></tbody>
             </table>
 
-            <!-- ===== 電費統計：依備註切出的每月抄表週期 ===== -->
-            <div id="elecAnalytics" class="ea-wrap">
-                <div class="ea-title">📊 每月週期統計與趨勢 <span class="ea-sub">（週期＝備註「N月→第1天」到「N月→電費X元」，不受上方篩選影響）</span></div>
-                <div class="ea-cards" id="eaCards"></div>
-
-                <div class="ea-block-title">📈 每月電費與日均度數趨勢</div>
-                <div class="ea-legend"><span><i class="ea-dot ea-dot-bar"></i>每月電費（元）</span><span><i class="ea-dot ea-dot-line"></i>日均度數</span><span><i class="ea-dot ea-dot-prog"></i>進行中（預估）</span></div>
-                <div id="eaChart" class="ea-chart"></div>
-
-                <div class="ea-block-title">🗓️ 每月週期統計表（點一列可篩選該月明細）</div>
-                <div class="ea-scroll">
-                    <table class="ea-table">
-                        <thead>
-                            <tr>
-                                <th>月份</th>
-                                <th>週期區間</th>
-                                <th>週期天數</th>
-                                <th>每月度數</th>
-                                <th>每月電費</th>
-                                <th>日均度數</th>
-                                <th>日均電費</th>
-                                <th>較上月度數</th>
-                                <th style="min-width:100px;">日均趨勢</th>
-                            </tr>
-                        </thead>
-                        <tbody id="eaCycleBody"></tbody>
-                    </table>
-                </div>
-                <div class="ea-note" id="eaNote"></div>
-            </div>
         </div>
 
         <!-- ============================================================ -->
@@ -4225,6 +4231,22 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
             return s + '</svg>';
         }
 
+        // 統計卡片收合／展開（記住上次的狀態）
+        function toggleElecAnalytics() {
+            const w = document.getElementById('elecAnalytics');
+            if (!w) return;
+            const c = w.classList.toggle('ea-collapsed');
+            try { localStorage.setItem('elecAnalyticsCollapsed', c ? '1' : '0'); } catch (e) {}
+        }
+        (function () {
+            try {
+                if (localStorage.getItem('elecAnalyticsCollapsed') === '1') {
+                    const w = document.getElementById('elecAnalytics');
+                    if (w) w.classList.add('ea-collapsed');
+                }
+            } catch (e) {}
+        })();
+
         function renderElecAnalytics() {
             const cycles = getElecCycles();
             elecCycleCache = cycles;
@@ -4254,10 +4276,11 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="ea-card"><span class="ea-card-label">日均電費</span><span class="ea-card-val ea-red">${f2(tC / tD)} 元</span><span class="ea-card-sub">帳單金額 ÷ 天數</span></div>
                 <div class="ea-card"><span class="ea-card-label">每月度數</span><span class="ea-card-val">${f1(tK / done.length)} 度</span><span class="ea-card-sub">月平均</span></div>
                 <div class="ea-card"><span class="ea-card-label">每月電費</span><span class="ea-card-val ea-red">${f1(tC / done.length)} 元</span><span class="ea-card-sub">月平均</span></div>
+                <div class="ea-card"><span class="ea-card-label">總計電費支出</span><span class="ea-card-val ea-red">${Math.round(tC).toLocaleString()} 元</span><span class="ea-card-sub">${done.length} 個完整月合計 ${Math.round(tK)} 度${prog ? '<br>加進行中預估 ≈ ' + Math.round(tC + prog.cost).toLocaleString() + ' 元' : ''}</span></div>
                 <div class="ea-card"><span class="ea-card-label">平均週期</span><span class="ea-card-val">${f1(tD / done.length)} 天</span><span class="ea-card-sub">最短 ${Math.min(...done.map(c => c.days))}／最長 ${Math.max(...done.map(c => c.days))} 天</span></div>`;
             }
             if (prog) {
-                cards += `<div class="ea-card" style="background:var(--cream); border-style:dashed;"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估整月 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
+                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估整月 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
             }
             cardsEl.innerHTML = cards;
 

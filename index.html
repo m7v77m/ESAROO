@@ -2964,12 +2964,12 @@ html body #itemFilterTags .filter-tag {
 .ea-table td { border-bottom: 1px dashed #D4B896; }
 .ea-table tbody tr { cursor: pointer; }
 .ea-table tbody tr.ea-active { background: var(--matcha-pale); }
-.ea-part { font-size: 10px; color: var(--milk-tea-dark); border: 1px dashed #D4B896; border-radius: 10px; padding: 0 5px; }
+.ea-part { display: inline-block; margin-top: 3px; font-size: 10px; color: var(--milk-tea-dark); border: 1px dashed #D4B896; border-radius: 10px; padding: 0 5px; }
 .ea-bar-track { height: 10px; background: var(--milk-tea-light); border-radius: 6px; overflow: hidden; }
 .ea-bar { height: 100%; background: #8fa382; border-radius: 6px; }
 .ea-note { font-size: 11px; color: var(--text-muted); margin-top: 5px; line-height: 1.6; }
 /* 月份快速篩選（電費搜尋面板內） */
-#elecMonthChips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; width: 100%; max-width: 440px; margin-bottom: 2px; }
+#elecMonthChips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px !important; width: 100%; max-width: 440px; margin: 0 0 2px 0; padding: 2px; overflow: visible !important; border-radius: 0 !important; box-sizing: border-box; }
 #elecMonthChips .filter-tag { width: 100%; min-width: 0; padding: 3px 2px !important; font-size: 12px; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-sizing: border-box; }
 @media screen and (max-width: 768px) {
     .ea-wrap { padding: 10px; margin-top: 10px; }
@@ -4186,7 +4186,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
             cycles.forEach((c, i) => {
                 const on = sv === elecFmtD(c.start) && ev === elecFmtD(c.end);
                 const tip = `${elecFmtD(c.start)} ~ ${elecFmtD(c.end)}${c.inProgress ? '（進行中）' : ''}`;
-                h += `<span class="filter-tag ${on ? 'active' : ''}" title="${tip}" onclick="elecPickCycle(${i})">${c.name}${c.inProgress ? '･' : ''}</span>`;
+                h += `<span class="filter-tag ${on ? 'active' : ''}" title="${tip}" onclick="elecPickCycle(${i})">${c.name}</span>`;
             });
             box.innerHTML = h;
         }
@@ -4276,7 +4276,8 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="ea-card"><span class="ea-card-label">日均電費</span><span class="ea-card-val ea-red">${f2(tC / tD)} 元</span><span class="ea-card-sub">帳單金額 ÷ 天數</span></div>
                 <div class="ea-card"><span class="ea-card-label">每月度數</span><span class="ea-card-val">${f1(tK / done.length)} 度</span><span class="ea-card-sub">月平均</span></div>
                 <div class="ea-card"><span class="ea-card-label">每月電費</span><span class="ea-card-val ea-red">${f1(tC / done.length)} 元</span><span class="ea-card-sub">月平均</span></div>
-                <div class="ea-card"><span class="ea-card-label">總計電費支出</span><span class="ea-card-val ea-red">${Math.round(tC).toLocaleString()} 元</span><span class="ea-card-sub">${done.length} 個完整月合計 ${Math.round(tK)} 度${prog ? '<br>加進行中預估 ≈ ' + Math.round(tC + prog.cost).toLocaleString() + ' 元' : ''}</span></div>
+                <div class="ea-card"><span class="ea-card-label">總計電費</span><span class="ea-card-val ea-red">${Math.round(tC).toLocaleString()} 元</span><span class="ea-card-sub">${prog ? '加進行中預估 ≈ ' + Math.round(tC + prog.cost).toLocaleString() + ' 元' : '完整月帳單合計'}</span></div>
+                <div class="ea-card"><span class="ea-card-label">總計度數</span><span class="ea-card-val">${Math.round(tK).toLocaleString()} 度</span><span class="ea-card-sub">${done.length} 個完整月合計</span></div>
                 <div class="ea-card"><span class="ea-card-label">平均週期</span><span class="ea-card-val">${f1(tD / done.length)} 天</span><span class="ea-card-sub">最短 ${Math.min(...done.map(c => c.days))}／最長 ${Math.max(...done.map(c => c.days))} 天</span></div>`;
             }
             if (prog) {
@@ -4301,7 +4302,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 const on = sv === elecFmtD(c.start) && ev === elecFmtD(c.end);
                 const w = Math.max(3, Math.round(c.perDay / maxP * 100));
                 h += `<tr class="${on ? 'ea-active' : ''}" onclick="elecPickCycle(${i})">
-                    <td class="nowrap-cell"><b>${c.name}</b>${c.inProgress ? ' <span class="ea-part">進行中</span>' : ''}</td>
+                    <td class="nowrap-cell"><b>${c.name}</b>${c.inProgress ? '<br><span class="ea-part">進行中</span>' : ''}</td>
                     <td class="nowrap-cell" style="font-size:12px;">${elecFmtD(c.start)} ~ ${elecFmtD(c.end)}</td>
                     <td>${c.inProgress ? c.days + '/' + c.totalDays : c.days} 天</td>
                     <td>${f1(c.kwh)}${c.inProgress ? `<br><span style="font-size:11px;color:var(--text-muted);">預估 ${f1(c.projKwh)}</span>` : ''}</td>

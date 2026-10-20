@@ -2936,7 +2936,7 @@ html body #itemFilterTags .filter-tag {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style id="elec-analytics-css">
 /* 電費統計：每月週期、趨勢圖、月份快選 */
-.ea-wrap { margin: 0 0 10.5px 0; padding: 12px; background: var(--beige); border: 0.5px solid #D4B896; border-radius: 15px; }
+.ea-wrap { margin: 0 0 10.5px 0; padding: 12px; background: var(--beige); border: 1.0px solid #D4B896; border-radius: 15px; }
 .ea-title { font-weight: 700; font-size: 14px; color: var(--matcha-dark); margin-bottom: 8px; line-height: 1.5; cursor: pointer; user-select: none; }
 .ea-caret { display: inline-block; width: 14px; transition: transform .15s; }
 .ea-wrap.ea-collapsed .ea-caret { transform: rotate(-90deg); }
@@ -4281,7 +4281,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="ea-card"><span class="ea-card-label">平均週期</span><span class="ea-card-val">${f1(tD / done.length)} 天</span><span class="ea-card-sub">最短 ${Math.min(...done.map(c => c.days))} 天／最長 ${Math.max(...done.map(c => c.days))} 天</span></div>`;
             }
             if (prog) {
-                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估整月 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
+                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
             }
             cardsEl.innerHTML = cards;
 

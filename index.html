@@ -841,6 +841,7 @@ table:has(#bowelTableBody) td {
     margin: 0 !important;
     box-sizing: border-box !important;
     table-layout: fixed !important;
+    border: 1px solid var(--border-light) !important; /* 新增這行：讓外框變成淺奶茶色 */
 }
 
 /* 表格欄位等寬 - 要的等寬 */
@@ -2951,7 +2952,7 @@ html body #itemFilterTags .filter-tag {
 .ea-card-sub { font-size: 10.5px; color: var(--text-muted); }
 .ea-red { color: var(--danger); }
 .ea-empty { grid-column: 1 / -1; text-align: center; color: var(--text-muted); font-size: 13px; padding: 10.5px; line-height: 1.6; }
-.ea-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11px; color: var(--text-light); margin-bottom: 4px; }
+.ea-legend { display: flex; flex-wrap: wrap; justify-content: right; gap: 4px 14px; font-size: 11px; color: var(--text-light); margin-bottom: 4px; }
 .ea-dot { display: inline-block; width: 10.5px; height: 10.5px; margin-right: 4px; vertical-align: -1px; }
 .ea-dot-bar { background: #8fa382; border-radius: 3px; }
 .ea-dot-prog { background: #dfe7d8; border: 1px dashed #8fa382; border-radius: 3px; }
@@ -4277,11 +4278,11 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="ea-card"><span class="ea-card-label">每月度數</span><span class="ea-card-val">${f1(tK / done.length)} 度</span><span class="ea-card-sub">每月平均</span></div>
                 <div class="ea-card"><span class="ea-card-label">每月電費</span><span class="ea-card-val ea-red">${f1(tC / done.length)} 元</span><span class="ea-card-sub">每月平均</span></div>
                 <div class="ea-card"><span class="ea-card-label">總計度數</span><span class="ea-card-val">${Math.round(tK).toLocaleString()} 度</span><span class="ea-card-sub">${done.length} 個完整月 合計</span></div>
-                <div class="ea-card"><span class="ea-card-label">總計電費</span><span class="ea-card-val ea-red">${Math.round(tC).toLocaleString()} 元</span><span class="ea-card-sub">${prog ? '加上"進行中，預估 ≈ ' + Math.round(tC + prog.cost).toLocaleString() + ' 元' : '完整月帳單合計'}</span></div>
+                <div class="ea-card"><span class="ea-card-label">總計電費</span><span class="ea-card-val ea-red">${Math.round(tC).toLocaleString()} 元</span><span class="ea-card-sub">${prog ? '加"進行中"，預估 ≈ ' + Math.round(tC + prog.cost).toLocaleString() + ' 元' : '完整月帳單合計'}</span></div>
                 <div class="ea-card"><span class="ea-card-label">平均週期</span><span class="ea-card-val">${f1(tD / done.length)} 天</span><span class="ea-card-sub">最短 ${Math.min(...done.map(c => c.days))} 天／最長 ${Math.max(...done.map(c => c.days))} 天</span></div>`;
             }
             if (prog) {
-                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
+                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}"進行中"（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
             }
             cardsEl.innerHTML = cards;
 

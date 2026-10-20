@@ -4277,11 +4277,11 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="ea-card"><span class="ea-card-label">每月度數</span><span class="ea-card-val">${f1(tK / done.length)} 度</span><span class="ea-card-sub">每月平均</span></div>
                 <div class="ea-card"><span class="ea-card-label">每月電費</span><span class="ea-card-val ea-red">${f1(tC / done.length)} 元</span><span class="ea-card-sub">每月平均</span></div>
                 <div class="ea-card"><span class="ea-card-label">總計度數</span><span class="ea-card-val">${Math.round(tK).toLocaleString()} 度</span><span class="ea-card-sub">${done.length} 個完整月 合計</span></div>
-                <div class="ea-card"><span class="ea-card-label">總計電費</span><span class="ea-card-val ea-red">${Math.round(tC).toLocaleString()} 元</span><span class="ea-card-sub">${prog ? '加"進行中"，預估 ≈ ' + Math.round(tC + prog.cost).toLocaleString() + ' 元' : '完整月帳單合計'}</span></div>
+                <div class="ea-card"><span class="ea-card-label">總計電費</span><span class="ea-card-val ea-red">${Math.round(tC).toLocaleString()} 元</span><span class="ea-card-sub">${prog ? '加進行中，預估 ≈ ' + Math.round(tC + prog.cost).toLocaleString() + ' 元' : '完整月帳單合計'}</span></div>
                 <div class="ea-card"><span class="ea-card-label">平均週期</span><span class="ea-card-val">${f1(tD / done.length)} 天</span><span class="ea-card-sub">最短 ${Math.min(...done.map(c => c.days))} 天／最長 ${Math.max(...done.map(c => c.days))} 天</span></div>`;
             }
             if (prog) {
-                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}"進行中"（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
+                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
             }
             cardsEl.innerHTML = cards;
 
@@ -5548,6 +5548,28 @@ html body .btn-add {
         margin-top: 1.8px !important;    /* 縮小與上方「批次分類下拉選單」的距離 */
         margin-bottom: 1.8px !important; /* 縮小與下方「管理分類」按鈕的距離 */
     }
+}
+</style>
+<!-- 終極完美進化：縮扁頂部且字體不打架 -->
+<style>
+html body .ea-wrap {
+    padding-top: 6px !important;     /* 微微放鬆到 6px，留出舒服的頂部小空隙 */
+}
+
+html body .ea-title {
+    margin-top: 0 !important;        /* 恢復 0，不使用負邊距，避免把字壓扁 */
+    margin-bottom: 8px !important;   /* 保持與下方卡片適當的距離 */
+    height: auto !important;         /* 關鍵：解除高度鎖死！讓它自然呈現 */
+    line-height: 1.4 !important;     /* 舒服的行高 */
+    display: block !important;       /* 改回區塊佈局，讓文字字數多時可以自然換行 */
+}
+
+/* 額外加碼：讓後面那串括號的小字變小、變淡，這樣就不會顯得太粗重、更好看 */
+html body .ea-title .ea-sub {
+    font-size: 11px !important;
+    color: var(--text-muted) !important;
+    display: inline !important;      /* 讓小字乖乖跟在標題後面 */
+    font-weight: normal !important;  /* 讓說明小字變細，凸顯主標題 */
 }
 </style>
 

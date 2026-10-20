@@ -5572,6 +5572,21 @@ html body .ea-title .ea-sub {
     font-weight: normal !important;  /* 讓說明小字變細，凸顯主標題 */
 }
 </style>
+<!-- 額外加碼：將 8 個小卡片的內裡上下徹底壓扁扁 -->
+<style>
+html body .ea-cards .ea-card {
+    padding-top: 4px !important;    /* 強制將卡片內裡上方縮小到 4px */
+    padding-bottom: 4px !important; /* 強制將卡片內裡下方縮小到 4px */
+    gap: 1px !important;            /* 縮小卡片內部標題與數字之間的上下間距 */
+}
+
+html body .ea-cards .ea-card .ea-card-label {
+    line-height: 1.2 !important;    /* 讓小標籤文字更緊湊 */
+}
+
+html body .ea-cards .ea-card .ea-card-val {
+    line-height: 1.2 !important;    /* 讓大數字文字更緊湊 */
+}
 
 </body>
 </html>

@@ -5572,21 +5572,61 @@ html body .ea-title .ea-sub {
     font-weight: normal !important;  /* 讓說明小字變細，凸顯主標題 */
 }
 </style>
-<!-- 額外加碼：將 8 個小卡片的內裡上下徹底壓扁扁 -->
-<style>
-html body .ea-cards .ea-card {
-    padding-top: 4px !important;    /* 強制將卡片內裡上方縮小到 4px */
-    padding-bottom: 4px !important; /* 強制將卡片內裡下方縮小到 4px */
-    gap: 1px !important;            /* 縮小卡片內部標題與數字之間的上下間距 */
+
+<!-- ① 電費統計收合時壓扁 ② 導覽列改成「懸浮圓角卡片」底座（參考時來運轉） -->
+<style id="nav-card-and-collapse">
+/* ① 收合時：標題下面不再留空（蓋過上面 .ea-title 的 8px !important），底部內距跟頂部一樣 6px */
+html body .ea-wrap.ea-collapsed .ea-title { margin-bottom: 0 !important; }
+html body .ea-wrap.ea-collapsed { padding-bottom: 6px !important; }
+/* 電腦版：下面的搜尋區有 -16px 上邊距會蓋住統計卡的下框，卡片下邊距補到 16px（手機不受影響） */
+@media screen and (min-width: 769px) {
+    html body .ea-wrap { margin-bottom: 16px !important; }
 }
 
-html body .ea-cards .ea-card .ea-card-label {
-    line-height: 1.2 !important;    /* 讓小標籤文字更緊湊 */
+/* ② 導覽列底座：不再貼著頂端和左右邊，變成有留白、圓角、淡陰影的懸浮卡片 */
+html body .navbar {
+    width: auto !important;
+    margin: 8px 8px 0 8px !important;
+    background-color: var(--cream) !important;
+    border: 1px solid var(--border-light) !important;
+    border-radius: 22px !important;
+    box-shadow: var(--shadow-soft) !important;
 }
-
-html body .ea-cards .ea-card .ea-card-val {
-    line-height: 1.2 !important;    /* 讓大數字文字更緊湊 */
+@media screen and (max-width: 768px) {
+    /* 手機：第一排標題置中，第二排 檔案／模式／檢視 平均分開 */
+    html body .navbar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        flex-wrap: nowrap !important;
+        height: auto !important;
+        padding: 9px 10px 3px 10px !important;
+        gap: 0 !important;
+    }
+    html body .navbar .nav-title {
+        flex: none !important;
+        justify-content: center !important;
+        text-align: center !important;
+        margin: 0 0 2px 0 !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+    }
+    html body .navbar .nav-menu {
+        width: 100% !important;
+        flex: none !important;
+        justify-content: space-around !important;
+        gap: 0 !important;
+    }
+    html body .navbar .nav-item {
+        flex: 1 1 0 !important;
+        justify-content: center !important;
+    }
+    html body .navbar .nav-btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 6px 4px !important;
+    }
 }
+</style>
 
 </body>
 </html>

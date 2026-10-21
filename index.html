@@ -5711,6 +5711,21 @@ html body .container {
     --zl-gap: 10.5px !important; /* 確保大卡片、中卡片、統計小卡之間的空隙維持原樣、不被壓縮 */
 }
 </style>
+<!-- 額外加碼：將 8 個小卡片的內裡上下徹底壓扁扁 -->
+<style>
+html body .ea-cards .ea-card {
+    padding-top: 3px !important;    /* 強制將卡片內裡上方縮小到 3px */
+    padding-bottom: 5px !important; /* 強制將卡片內裡下方縮小到 5px */
+    gap: 1px !important;            /* 縮小卡片內部標題與數字之間的上下間距 */
+}
+
+html body .ea-cards .ea-card .ea-card-label {
+    line-height: 1.2 !important;    /* 讓小標籤文字更緊湊 */
+}
+
+html body .ea-cards .ea-card .ea-card-val {
+    line-height: 1.2 !important;    /* 讓大數字文字更緊湊 */
+}
 
 </body>
 </html>

@@ -5575,7 +5575,22 @@ html body .ea-title .ea-sub {
 
 <!-- ① 電費統計收合時壓扁 ② 導覽列改成「懸浮圓角卡片」底座（參考時來運轉） -->
 <style id="nav-card-and-collapse">
-/* ① 收合時：標題下面不再留空（蓋過上面 .ea-title 的 8px !important），底部內距跟頂部一樣 6px */
+/* ============================================================
+   綜合紀錄：配色與間距「一個地方改全部」
+   想換顏色、想改縫隙大小，只要改下面這 5 個數值就好
+   （配色參考時來運轉：奶茶大背景 #D7C4A5、蜂蜜牛奶白 #FFF8EB、餅乾邊框 #D4B896）
+   ============================================================ */
+:root {
+    --zl-gap:  10px;       /* 頁面邊→導覽列→大框→中框→小卡 全部的縫隙（用整數 px，手機螢幕不會出現半像素的胖瘦） */
+    --zl-body: #D7C4A5;    /* 頁面背景：奶茶大背景 */
+    --zl-big:  #FFF8EB;    /* 導覽列＆大框框底色：蜂蜜牛奶白 */
+    --zl-mid:  #FDF6ED;    /* 中框框底色（統計卡、搜尋面板） */
+    --zl-line: #D4B896;    /* 所有框線同一個顏色：餅乾邊框 */
+}
+html { background-color: var(--zl-body); }
+html body { background-color: var(--zl-body) !important; }
+
+/* ① 電費統計收合時：標題下面不留空 */
 html body .ea-wrap.ea-collapsed .ea-title { margin-bottom: 0 !important; }
 html body .ea-wrap.ea-collapsed { padding-bottom: 6px !important; }
 /* 電腦版：下面的搜尋區有 -16px 上邊距會蓋住統計卡的下框，卡片下邊距補到 16px（手機不受影響） */
@@ -5583,34 +5598,43 @@ html body .ea-wrap.ea-collapsed { padding-bottom: 6px !important; }
     html body .ea-wrap { margin-bottom: 16px !important; }
 }
 
-/* ② 導覽列底座：不再貼著頂端和左右邊，變成有留白、圓角、淡陰影的懸浮卡片 */
+/* ② 所有「框」統一：同一條框線顏色、同樣 1px，邊緣才看得清楚、縫隙才比得準 */
 html body .navbar {
     width: auto !important;
-    margin: 10.5px 10.5px 0 10.5px !important;      /* 頁面邊→導覽列 10.5 */
-    background-color: #F0DFC0 !important;            /* 蜂蜜奶茶色：跟「重新設定」按鈕同色 */
-    border: 1px solid #D4B896 !important;            /* 餅乾邊框（時來運轉同款） */
+    margin: var(--zl-gap) var(--zl-gap) 0 var(--zl-gap) !important;   /* 頁面邊→導覽列 */
+    background-color: var(--zl-big) !important;
+    border: 1px solid var(--zl-line) !important;
     border-radius: 22px !important;
-    box-shadow: var(--shadow-soft) !important;
+    box-shadow: 0 2px 8px rgba(74, 55, 40, 0.12) !important;
 }
-html body .navbar .nav-btn { color: var(--text-main) !important; }
-html body .navbar .nav-item:hover .nav-btn,
-html body .navbar .nav-btn:hover,
-html body .navbar .nav-item.dropdown-open .nav-btn {
-    background-color: #E8D5B0 !important;            /* 焦糖奶茶（時來運轉 hover 色） */
-    color: var(--text-main) !important;
+html body .container { padding: var(--zl-gap) !important; }           /* 導覽列→大框、頁面邊→大框 */
+html body .tab-content {
+    background-color: var(--zl-big) !important;
+    border: 1px solid var(--zl-line) !important;
+    box-shadow: 0 2px 8px rgba(74, 55, 40, 0.12) !important;
+}
+html body .sticky-header-container { background-color: var(--zl-big) !important; }
+html body .ea-wrap,
+html body #tab-elec .search-panel {
+    background-color: var(--zl-mid) !important;
+    border: 1px solid var(--zl-line) !important;
+    box-shadow: none !important;
 }
 
-/* ===== 間距統一 10.5px：頁面邊→大框→中框→小框（量的是框線與框線之間的可見距離）===== */
-html body .container { padding: 10.5px !important; }   /* 導覽列→大框、頁面邊→大框、大框→頁面底 */
+/* ③ 間距：量的是「兩條框線之間的空白」，每一層都等於一個 --zl-gap */
 @media screen and (max-width: 768px) {
-    html body #tab-elec.tab-content { padding: 9.5px !important; }          /* 框線 1px + 9.5 = 10.5：大框→中框 */
-    html body .ea-wrap { padding-left: 9.5px !important; padding-right: 9.5px !important; }   /* 中框→小卡片 */
-    html body .ea-wrap:not(.ea-collapsed) { padding-bottom: 9.5px !important; }
-    html body #tab-elec .search-panel { padding: 9.5px !important; }       /* 搜尋面板→月份標籤 */
-    html body #elecMonthChips { gap: 10.5px !important; }                  /* 月份小標籤之間 */
+    html body #tab-elec.tab-content { padding: var(--zl-gap) !important; }           /* 大框→中框 */
+    html body .ea-wrap { padding-left: var(--zl-gap) !important; padding-right: var(--zl-gap) !important; }   /* 中框→小卡片 */
+    html body .ea-wrap:not(.ea-collapsed) { padding-bottom: var(--zl-gap) !important; }
+    html body #tab-elec .search-panel { padding: var(--zl-gap) !important; }         /* 搜尋面板→月份標籤 */
+    html body #elecMonthChips { gap: var(--zl-gap) !important; }                                 /* 月份小標籤之間 */
+    html body .ea-wrap { margin-bottom: var(--zl-gap) !important; }                              /* 統計中框→搜尋面板 */
+    html body .ea-cards { gap: var(--zl-gap) !important; }                                       /* 統計小卡之間 */
+    html body #elecSelectionPanel { margin-top: var(--zl-gap) !important; }                      /* 已選取統計：與小卡的距離 */
 }
+
+/* ④ 手機導覽列：第一排標題置中，第二排 檔案／模式／檢視 平均分開 */
 @media screen and (max-width: 768px) {
-    /* 手機：第一排標題置中，第二排 檔案／模式／檢視 平均分開 */
     html body .navbar {
         flex-direction: column !important;
         align-items: stretch !important;

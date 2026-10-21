@@ -5586,11 +5586,28 @@ html body .ea-wrap.ea-collapsed { padding-bottom: 6px !important; }
 /* ② 導覽列底座：不再貼著頂端和左右邊，變成有留白、圓角、淡陰影的懸浮卡片 */
 html body .navbar {
     width: auto !important;
-    margin: 8px 8px 0 8px !important;
-    background-color: var(--cream) !important;
-    border: 1px solid var(--border-light) !important;
+    margin: 10.5px 10.5px 0 10.5px !important;      /* 頁面邊→導覽列 10.5 */
+    background-color: #F0DFC0 !important;            /* 蜂蜜奶茶色：跟「重新設定」按鈕同色 */
+    border: 1px solid #D4B896 !important;            /* 餅乾邊框（時來運轉同款） */
     border-radius: 22px !important;
     box-shadow: var(--shadow-soft) !important;
+}
+html body .navbar .nav-btn { color: var(--text-main) !important; }
+html body .navbar .nav-item:hover .nav-btn,
+html body .navbar .nav-btn:hover,
+html body .navbar .nav-item.dropdown-open .nav-btn {
+    background-color: #E8D5B0 !important;            /* 焦糖奶茶（時來運轉 hover 色） */
+    color: var(--text-main) !important;
+}
+
+/* ===== 間距統一 10.5px：頁面邊→大框→中框→小框（量的是框線與框線之間的可見距離）===== */
+html body .container { padding: 10.5px !important; }   /* 導覽列→大框、頁面邊→大框、大框→頁面底 */
+@media screen and (max-width: 768px) {
+    html body #tab-elec.tab-content { padding: 9.5px !important; }          /* 框線 1px + 9.5 = 10.5：大框→中框 */
+    html body .ea-wrap { padding-left: 9.5px !important; padding-right: 9.5px !important; }   /* 中框→小卡片 */
+    html body .ea-wrap:not(.ea-collapsed) { padding-bottom: 9.5px !important; }
+    html body #tab-elec .search-panel { padding: 9.5px !important; }       /* 搜尋面板→月份標籤 */
+    html body #elecMonthChips { gap: 10.5px !important; }                  /* 月份小標籤之間 */
 }
 @media screen and (max-width: 768px) {
     /* 手機：第一排標題置中，第二排 檔案／模式／檢視 平均分開 */

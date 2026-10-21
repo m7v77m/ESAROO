@@ -11,7 +11,7 @@
             --matcha: #8fa382;          /* 抹茶綠 - 主色 */
             --matcha-dark: #5D7A42;     /* 深抹茶 */
             --matcha-light: #A3C68C;    /* 淺抹茶 */
-            --matcha-pale: #c6d6ba;     /* 極淺抹茶 */
+            --matcha-pale: #E8F0E0;     /* 極淺抹茶 */
 
             --milk-tea: #D4A578;        /* 奶茶色 - 輔助色 */
             --milk-tea-dark: #C4956A;   /* 深奶茶 */
@@ -2987,7 +2987,11 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
 
     <!-- ===== 導航欄 ===== -->
     <nav class="navbar">
-        <div class="nav-title" style="font-size:30px; color: #666218; ">綜合紀錄&nbsp;&nbsp; ૮₍ ˶ᵔ ᵕ ᵔ˶ ₎ა &nbsp;&nbsp;生活管家</div>
+        <!-- Emoji 閃亮大標題，不需神經線、手機 100% 成功露臉且絕對置中 -->
+<div class="nav-title" style="font-size: 17px !important; color: #666218; font-weight: 800; width: 100% !important; display: flex !important; justify-content:center !important; align-items: center !important; margin: 0 0 4px 0 !important; padding: 0 !important; text-align: center !important;">
+   𓇢&nbsp;𓆸&nbsp;&nbsp;𓂃&nbsp;&nbsp;綜合紀錄&nbsp;&nbsp;𓂃&nbsp;&nbsp;記錄生活&nbsp;&nbsp;𓂃&nbsp;&nbsp;ೃ 
+</div>
+
         <div class="nav-menu">
             <div class="nav-item">
                 <button class="nav-btn">檔案 ▾</button>
@@ -3026,22 +3030,26 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
             <div id="elecAnalytics" class="ea-wrap">
                 <div class="ea-title" onclick="toggleElecAnalytics()" title="點一下收合／展開"><span class="ea-caret" id="eaCaret">▾</span> 📊 電費統計 <span class="ea-sub">（每月週期＝備註「N月→第1天」到「N月→電費X元」；勾選明細會在這裡顯示已選取統計）</span></div>
                 <div class="ea-cards" id="eaCards"></div>
-
-                     <div class="batch-panel" id="elecSelectionPanel" style="display:none; margin:10.5px 0 0 0; padding:10.5px 15px;">
-    <div style="font-weight: 600; font-size: 13px; color: var(--matcha-dark); margin-bottom: 4px; width: 100%;">✅ 已選取統計：</div>
-    <div style="display: flex; flex-wrap: wrap; gap: 4px 6px; width: 100%; align-items: center; justify-content: flex-start; text-align: left;">
-        <span style="font-size:13px; color:var(--text-light); white-space: nowrap; display: inline-block;">｜已選項目 <strong id="selElecCount">0</strong> 筆</span>
-        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜總計電費：<strong id="selElecNoteCost">0</strong> 元</span>         
-        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜產生幾度：<strong id="selElecKwh">0.00</strong> 度</span>
-        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜產生電費：<strong id="selElecCost">0.00</strong> 元</span>
-        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜日均幾度：<strong id="selElecAvgKwh">0.00</strong> 度</span>
-        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜日均電費：<strong id="selElecAvgCost">0.00</strong> 元</span> 
-        <span style="font-size:13px; color:var(--text-light); white-space: nowrap;">｜已選週期：<strong id="selElecPeriod">0</strong> 天</span>
-        <span style="font-size:13px; color:var(--danger); font-weight:600; white-space: nowrap;">｜週期電均：<strong id="selElecNoteAvg">0.00</strong> 元</span>
-        <!-- 💡 魔法小跟班：取消 100% 限制，讓它像磁鐵一樣，精準吸到電費平均的右邊！ -->
-        
+                    <!-- 消滅所有隱形魔王，全面鎖死零空白排版 -->
+<div class="batch-panel" id="elecSelectionPanel" style="display: none; margin: 10.5px 0 0 0 !important; padding: 8px 15px 10.5px 15px !important; gap: 0px !important;">
+    <div style="font-weight: 600; font-size: 13.0px; color: var(--matcha-dark); margin: 0 0 6px 0 !important; padding: 0 !important; line-height: 1.2 !important; width: 100%;">✅ 已選取統計：</div>
+    
+    <!-- 終極進化第一行：利用負邊距磁鐵，直接把左邊肥肉徹底消滅！ -->
+<div style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 5px 8px !important; width: 100% !important; text-align: left !important; margin-left: -7px !important;">
+        <span style="font-size:12.5px; color:var(--text-light); white-space: nowrap;">｜已選項目 <strong id="selElecCount">0</strong> 筆</span>
+        <span style="font-size:12.5px; color:var(--danger); font-weight:500; white-space: nowrap;">｜總計電費：<strong id="selElecNoteCost">0</strong> 元</span>
+                                
+        <span style="font-size:12.5px; color:var(--text-light); white-space: nowrap;">｜產生幾度：<strong id="selElecKwh">0.00</strong> 度</span>
+        <span style="font-size:12.5px; color:var(--danger); font-weight:500; white-space: nowrap;">｜產生電費：<strong id="selElecCost">0.00</strong> 元</span>
+                                
+        <span style="font-size:12.5px; color:var(--text-light); white-space: nowrap;">｜日均幾度：<strong id="selElecAvgKwh">0.00</strong> 度</span>
+        <span style="font-size:12.5px; color:var(--danger); font-weight:500; white-space: nowrap;">｜日均電費：<strong id="selElecAvgCost">0.00</strong> 元</span>
+                                
+        <span style="font-size:12.5px; color:var(--text-light); white-space: nowrap;">｜已選週期：<strong id="selElecPeriod">0</strong> 天</span>
+        <span style="font-size:12.5px; color:var(--danger); font-weight:500; white-space: nowrap;">｜週期電均：<strong id="selElecNoteAvg">0.00</strong> 元</span>
     </div>
 </div>
+
 
 
                 <div class="ea-block-title">📈 每月電費與日均度數趨勢</div>
@@ -3074,7 +3082,8 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
             <div class="top-controls-wrapper">
                 <div class="search-panel tab-search-panel" style="flex:1.5; min-width:300px;">
                     <!-- <div class="search-title">🔍 電費紀錄搜尋</div> -->
-                    <div id="elecMonthChips" class="tag-container"></div>
+                    <!-- 雷霆一擊：直接在 HTML 身上把間隙鎖定，上下 3px、左右 4px，絕對縮扁扁！ -->
+<div id="elecMonthChips" class="tag-container" style="display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: 6px 6px !important; width: 100% !important; max-width: 440px !important; overflow: visible !important; border-radius: 0px !important; box-sizing: border-box !important; margin-bottom: 2px !important;"></div>
                     <div class="input-box">
                         <label>起始日期</label>
                         <input type="date" id="elecFilterStartDate" onchange="renderElectricity()">
@@ -5581,8 +5590,8 @@ html body .ea-title .ea-sub {
    ============================================================ */
 :root {
     --zl-gap:  10.5px;     /* 頁面邊→導覽列→大框→中框→小卡 全部的縫隙（用整數 px，手機螢幕不會出現半像素的胖瘦） */
-    --zl-body: #E8D5C4;    /* 頁面背景：奶茶大背景 */ 
-    --zl-big:  #E8F0E0;    /* 導覽列＆大框框底色：蜂蜜牛奶白 */
+    --zl-body: #c6d6ba;    /* 頁面背景：奶茶大背景 */ 
+    --zl-big:  #F5EDE0;    /* 導覽列＆大框框底色：蜂蜜牛奶白 */
     --zl-mid:  #F5EDE0;    /* 中框框底色（統計卡、搜尋面板） */
     --zl-line: #D4B896;    /* 所有框線同一個顏色：餅乾邊框 */
 }
@@ -5626,10 +5635,10 @@ html body #tab-elec .search-panel {
     html body .ea-wrap { padding-left: var(--zl-gap) !important; padding-right: var(--zl-gap) !important; }   /* 中框→小卡片 */
     html body .ea-wrap:not(.ea-collapsed) { padding-bottom: var(--zl-gap) !important; }
     html body #tab-elec .search-panel { padding: var(--zl-gap) !important; }         /* 搜尋面板→月份標籤 */
-    html body #elecMonthChips { gap: var(--zl-gap) !important; }                                 /* 月份小標籤之間 */
-    html body .ea-wrap { margin-bottom: var(--zl-gap) !important; }                              /* 統計中框→搜尋面板 */
-    html body .ea-cards { gap: var(--zl-gap) !important; }                                       /* 統計小卡之間 */
-    html body #elecSelectionPanel { margin-top: var(--zl-gap) !important; }                      /* 已選取統計：與小卡的距離 */
+    html body #elecMonthChips { gap: var(--zl-gap) !important; }                     /* 月份小標籤之間 */
+    html body .ea-wrap { margin-bottom: var(--zl-gap) !important; }                  /* 統計中框→搜尋面板 */
+    html body .ea-cards { gap: var(--zl-gap) !important; }                           /* 統計小卡之間 */
+    html body #elecSelectionPanel { margin-top: var(--zl-gap) !important; }          /* 已選取統計：與小卡的距離 */
 }
 
 /* ④ 手機導覽列：第一排標題置中，第二排 檔案／模式／檢視 平均分開 */
@@ -5665,6 +5674,56 @@ html body #tab-elec .search-panel {
         justify-content: center !important;
         padding: 6px 4px !important;
     }
+}
+</style>
+<!-- 終極大範圍穿透魔法：一次切除左邊與下方兩條所有隱形肥肉 -->
+<style>
+
+/* 🎯 1. 降伏下面第一條橫向大空白（電費統計卡片「展開或收合」時，與趨勢圖之間的肥肉） */
+html body #elecAnalytics.ea-wrap {
+    margin-bottom: 10.5px !important;    /* 強制將電費統計大卡片下方的超寬空白縮小到 4px */
+    padding-bottom: 8px !important;   /* 縮緊大卡片內部的下邊距 */
+}
+
+/* 🎯 2. 降伏下面第二條橫向大空白（趨勢圖與下方每月週期統計表之間的尷尬肥肉） */
+html body #elecAnalytics .ea-chart {
+    margin-bottom: 4px !important;    /* 徹底壓扁趨勢圖圖表下方的邊距，原本太寬了 */
+}
+
+/* 🎯 3. 順便消滅趨勢圖下方標題頭頂的硬鐵板 */
+html body #elecAnalytics .ea-block-title {
+    margin-top: 6px !important;       /* 把原本 14px 的標題頭頂高度攔腰砍斷，只留 6px */
+    margin-bottom: 4px !important;    /* 縮小標題與下方表格之間的距離 */
+}
+<!-- 終極加碼魔法：精準收緊月份快速篩選標籤的上下左右間隙 -->
+<style>
+/* 🎯 1. 把月份格子之間的左右、上下縫隙通通縮小（原本是 10.5px，老公幫妳砍到只留 5px） */
+html body #elecMonthChips {
+    gap: 0px 0px !important;         /* 前面 5px 控制「上下排間隙」，後面 6px 控制「左右直條間隙」 */
+    margin-bottom: 0px !important;   /* 縮小整個月份區塊與下方起始日期之間的距離 */
+}
+
+/* 🎯 2. 順便讓每個月份小方塊內部更精實、更秀氣 */
+html body #elecMonthChips .filter-tag {
+    padding: 3px 3px !important;     /* 縮減小方塊內部的上下肉厚，讓它更扁更俐落 */
+    font-size: 14.5px !important;    /* 稍微調整一下字級，確保在小格子裡絕對不會被擠到換行 */
+}
+</style>
+<!-- 終極完美大結局 V2：精準縮小綠色背景 1px，同時保留卡片內部所有舒服間距 -->
+<style>
+/* 🎯 1. 頂部導航欄（包含檔案、模式、檢視）：精準把四周的綠色空隙砍掉 1px（從 10.5px 變成 9.5px） */
+html body .navbar {
+    margin: 9.5px 9.5px 0 9.5px !important; /* 上下左右的綠色背景一秒縮小 1px */
+}
+
+/* 🎯 2. 最外層大卡片容器：精準把四周的內距砍掉 1px（從 10.5px 變成 9.5px） */
+html body .container {
+    padding: 9.5px !important;  /* 這樣大卡片就會往外擴張 1px，把四周綠色部分擠小 */
+}
+
+/* 🎯 3. 完美守護核心：讓卡片內部與中卡片之間，依然維持原本 10.5px 的完美黃金間距，絕對不打架 */
+:root {
+    --zl-gap: 10.5px !important; /* 確保大卡片、中卡片、統計小卡之間的空隙維持原樣、不被壓縮 */
 }
 </style>
 

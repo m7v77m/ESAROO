@@ -5675,25 +5675,33 @@ html body #tab-elec .search-panel {
     }
 }
 </style>
-<!-- 終極大範圍穿透魔法：一次切除左邊與下方兩條所有隱形肥肉 -->
+<!-- 終極大範圍穿透魔法 ＆ 消滅粉紅橫條：兩大法術完美融合版 -->
 <style>
-
-/* 🎯 1. 降伏下面第一條橫向大空白（電費統計卡片「展開或收合」時，與趨勢圖之間的肥肉） */
+/* 🎯 1. 之前修好的大卡片下邊距：電費統計大卡片展開或收合時，維持完美緊湊 */
 html body #elecAnalytics.ea-wrap {
-    margin-bottom: 9.0px !important;    /* 強制將電費統計大卡片下方的超寬空白縮小到 6px */
-    padding-bottom: 6px !important;   /* 縮緊大卡片內部的下邊距 */
+    margin-bottom: 9.0px !important;    /* 保留原設定：大卡片下方絕不留肥肉 */
+    padding-bottom: 6px !important;     /* 保留原設定：縮緊大卡片內部下邊距 */
 }
 
-/* 🎯 2. 降伏下面第二條橫向大空白（趨勢圖與下方每月週期統計表之間的尷尬肥肉） */
+/* 🎯 2. 精準降伏已選取統計卡片：保持極致壓扁，並徹底擦掉底部的粉紅半透明陰影與紅痕 */
+html body #elecSelectionPanel {
+    margin-bottom: -2px !important;      /* 統計卡片下方鎖定 -2px 緊密距離 */
+    box-shadow: none !important;        /* 核心魔法：直接蒸發掉底部的半透明粉紅陰影！ */
+    border-bottom: 1.5px dashed #8fa382 !important; /* 強制四週都是完美的莫蘭迪綠虛線 */
+}
+
+/* 🎯 3. 之前修好的趨勢圖下邊距：趨勢圖表與下方每月週期統計表之間的尷尬肥肉 */
 html body #elecAnalytics .ea-chart {
-    margin-bottom: 9.0px !important;    /* 徹底壓扁趨勢圖圖表下方的邊距，原本太寬了 */
+    margin-bottom: 9.0px !important;    /* 保留原設定：徹底壓扁趨勢圖下方的邊距 */
 }
 
-/* 🎯 3. 順便消滅趨勢圖下方標題頭頂的硬鐵板 */
+/* 🎯 4. 完美融合雙重鎖死：全面砍斷標題頭頂的硬鐵板，讓兩個趨勢標題達到最高優先權的對稱 */
 html body #elecAnalytics .ea-block-title {
-    margin-top: 9.0px !important;       /* 把原本 14px 的標題頭頂高度攔腰砍斷，只留 4px */
-    margin-bottom: 4px !important;    /* 縮小標題與下方表格之間的距離 */
+    margin-top: 9.0px !important;       /* 保留原設定：把標題頭頂高度攔腰砍斷只留 9px */
+    margin-bottom: 4px !important;      /* 保留原設定：縮小標題與下方圖表/表格之間的距離 */
 }
+</style>
+
 <!-- 終極完美大結局 V2：精準縮小綠色背景 1px，同時保留卡片內部所有舒服間距 -->
 <style>
 /* 🎯 1. 頂部導航欄（包含檔案、模式、檢視）：精準把四周的綠色空隙砍掉 1px（從 10.5px 變成 9.5px） */

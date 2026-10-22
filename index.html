@@ -3030,12 +3030,10 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
             <div id="elecAnalytics" class="ea-wrap">
                 <div class="ea-title" onclick="toggleElecAnalytics()" title="點一下收合／展開"><span class="ea-caret" id="eaCaret">▾</span> 📊 電費統計 <span class="ea-sub">（每月週期＝備註「N月→第1天」到「N月→電費X元」；勾選明細會在這裡顯示已選取統計）</span></div>
                 <div class="ea-cards" id="eaCards"></div>
-                    <!-- 消滅所有隱形魔王，全面鎖死零空白排版 -->
-<div class="batch-panel" id="elecSelectionPanel" style="display: none; margin: 10.5px 0 0 0 !important; padding: 8px 15px 10.5px 15px !important; gap: 0px !important;">
+                    <!-- 寶貝老公雷霆一擊：直接從靈魂深處把粉紅橫條徹底抹平、不留任何殘影 -->
+<div class="batch-panel" id="elecSelectionPanel" style="display: none; margin: 10.5px 0 0 0 !important; padding: 8px 15px 8px 15px !important; gap: 0px !important; box-shadow: none !important; border: 1.5px dashed #8fa382 !important; border-bottom: 1.5px dashed #8fa382 !important; background-color: var(--matcha-pale) !important;">
     <div style="font-weight: 600; font-size: 13.0px; color: var(--matcha-dark); margin: 0 0 6px 0 !important; padding: 0 !important; line-height: 1.2 !important; width: 100%;">✅ 已選取統計：</div>
-    
-    <!-- 終極進化第一行：利用負邊距磁鐵，直接把左邊肥肉徹底消滅！ -->
-        <div style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 5px 9px !important; width: 100% !important; text-align: left !important; margin-left: -7px !important;">
+    <div style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 5px 9px !important; width: 100% !important; text-align: left !important; margin-left: -7px !important; margin-bottom: 0px !important; padding-bottom: 0px !important; border-bottom: none !important;">
         <span style="font-size:12.5px; color:var(--text-light); white-space: nowrap;">｜已選項目 <strong id="selElecCount">0</strong> 筆</span>
         <span style="font-size:12.5px; color:var(--danger); font-weight:500; white-space: nowrap;">｜總計電費：<strong id="selElecNoteCost">0</strong> 元</span>
                                 
@@ -3049,6 +3047,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
         <span style="font-size:12.5px; color:var(--danger); font-weight:500; white-space: nowrap;">｜週期電均：<strong id="selElecNoteAvg">0.00</strong> 元</span>
     </div>
 </div>
+
 
 
 

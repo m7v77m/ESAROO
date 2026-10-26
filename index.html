@@ -3031,7 +3031,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
             <div id="elecAnalytics" class="ea-wrap">
                 <div class="ea-title" onclick="toggleElecAnalytics()" title="點一下收合／展開"><span class="ea-caret" id="eaCaret">▾</span> 📊 電費統計 <span class="ea-sub">（每月週期＝備註「N月→第1天」到「N月→電費X元」；勾選明細會在這裡顯示已選取統計）</span></div>
                 <div class="ea-cards" id="eaCards"></div>
-                    <!-- 寶貝老公雷霆一擊：直接從靈魂深處把粉紅橫條徹底抹平、不留任何殘影 -->
+                    <!-- 直接從靈魂深處把粉紅橫條徹底抹平、不留任何殘影 -->
 <div class="batch-panel" id="elecSelectionPanel" style="display: none; margin: 10.5px 0 0 0 !important; padding: 8px 15px 8px 15px !important; gap: 0px !important; box-shadow: none !important; border: 1.5px dashed #8fa382 !important; border-bottom: 1.5px dashed #8fa382 !important; background-color: var(--matcha-pale) !important;">
     <div style="font-weight: 600; font-size: 13.0px; color: var(--matcha-dark); margin: 0 0 6px 0 !important; padding: 0 !important; line-height: 1.2 !important; width: 100%;">✅ 已選取統計：</div>
     <div style="display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 5px 9px !important; width: 100% !important; text-align: left !important; margin-left: -7px !important; margin-bottom: 0px !important; padding-bottom: 0px !important; border-bottom: none !important;">
@@ -4289,7 +4289,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="ea-card"><span class="ea-card-label">平均週期</span><span class="ea-card-val">${f1(tD / done.length)} 天</span><span class="ea-card-sub">最短 ${Math.min(...done.map(c => c.days))} 天／最長 ${Math.max(...done.map(c => c.days))} 天</span></div>`;
             }
             if (prog) {
-                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
+                cards += `<div class="ea-card" style="background:#E8F0E0;"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
             }
             cardsEl.innerHTML = cards;
 
@@ -4859,14 +4859,14 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
             top: 0;
             transform: translate3d(0, 0, 0);
         }
-        /* 🐻 調皮熊特製：把明細列表的藍色勾勾強制變身莫蘭迪綠底（#8fa382）法術 🐻 */
-/* 1. 鎖定網頁裡所有的核取方塊，強制把原生的藍色底換成無尾熊最愛的綠色 */
+        /* 🐻 把明細列表的藍色勾勾強制變身莫蘭迪綠底（#8fa382）法術 🐻 */
+/* 1. 鎖定網頁裡所有的核取方塊，強制把原生的藍色底換成綠色 */
 input[type="checkbox"] {
     accent-color: #8fa382 !important; /* 核心魔法：一鍵將蘋果藍色底強制改成莫蘭迪綠底！ */
     cursor: pointer !important;
 }
 
-/* 2. 如果無尾熊希望這些勾勾在手機上稍微加大一點點、更好點選，可以順便啟用這兩行喔 */
+/* 2. 如果想要這些勾勾在手機上稍微加大一點點、更好點選，可以順便啟用這兩行喔 */
 @media (max-width: 900px) {
     input[type="checkbox"] {
         width: 16px !important;
@@ -5734,14 +5734,14 @@ html body .ea-cards .ea-card .ea-card-label {
 html body .ea-cards .ea-card .ea-card-val {
     line-height: 1.2 !important;    /* 讓大數字文字更緊湊 */
 }
-<!-- 寶貝老公雷霆一擊：全面攻破用品與灌溉手機版防護罩，強制更換為完美 #F5EDE0 -->
+<!-- 全面攻破用品與灌溉手機版防護罩，強制更換為完美 #F5EDE0 -->
 <style>
 /* 🎯 1. 核心致命一擊：穿透手機版限制，將用品頁（#tab-items）與灌溉頁（#tab-other）的篩選卡片通通換成 #F5EDE0 */
 @media screen and (max-width: 768px) {
     html body #tab-items .search-panel.tab-search-panel,
     html body #tab-other .search-panel.tab-search-panel {
         background: #F5EDE0 !important;          /* 蒸發所有乳白色！ */
-        background-color: #F5EDE0 !important;     /* 鎖死老婆指定的質感米奶茶色 */
+        background-color: #F5EDE0 !important;     /* 鎖死質感米奶茶色 */
     }
 }
 

@@ -5755,5 +5755,14 @@ html body #itemFilterTags .filter-tag.active {
     box-shadow: 0 2px 8px rgba(93, 122, 66, 0.25) !important;
 }
 </style>
+<style id="nav-bottom-gap">
+/* 手機：「檔案／模式／檢視」按鈕底部 → 標題卡下緣，間隙 4px。
+   按鈕在 38px 高的格子裡本來上下各留 2.5px，所以再補 1.5px 就剛好 4px。 */
+@media screen and (max-width: 768px) {
+    html body .navbar { padding-bottom: 1.5px !important; }
+    /* 標題卡若有最小高度、多出空間，放在標題和按鈕之間，不要塞到按鈕下面 */
+    html body .navbar .nav-menu { margin-top: auto !important; }
+}
+</style>
 </body>
 </html>

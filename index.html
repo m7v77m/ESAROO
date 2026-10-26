@@ -1227,7 +1227,7 @@ table {
 
         .navbar {
             height: auto !important;
-            min-height: 50px;
+            min-height: 80px;
             padding: 4px 10.5px !important;
             gap: 4px;
             flex-wrap: nowrap !important;
@@ -4289,7 +4289,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="ea-card"><span class="ea-card-label">平均週期</span><span class="ea-card-val">${f1(tD / done.length)} 天</span><span class="ea-card-sub">最短 ${Math.min(...done.map(c => c.days))} 天／最長 ${Math.max(...done.map(c => c.days))} 天</span></div>`;
             }
             if (prog) {
-                cards += `<div class="ea-card" style="background:#E8F0E0;"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
+                cards += `<div class="ea-card" style="background:var(--cream);"><span class="ea-card-label">${prog.name}進行中（${prog.days}/${prog.totalDays} 天）</span><span class="ea-card-val">${f1(prog.kwh)} 度</span><span class="ea-card-sub">預估 ${f1(prog.projKwh)} 度 ≈ <b class="ea-red">${Math.round(prog.cost)} 元</b></span></div>`;
             }
             cardsEl.innerHTML = cards;
 

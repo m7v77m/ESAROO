@@ -1250,13 +1250,14 @@ table {
             overflow-x: auto;
             overflow-y: visible;
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            scrollbar-width: none;            
         }
         .nav-menu::-webkit-scrollbar { display: none; }
 
         .nav-item {
             flex: 0 0 auto;
             height: 38px !important;
+            margin-bottom:5px;
             overflow: visible !important;
         }
 
@@ -1280,7 +1281,8 @@ table {
 
         .dropdown-content {
             position: fixed !important;
-            top: auto;
+            top: auto;  
+            margin-top:14px;          
             left: auto;
             min-width: 150px;
             max-width: calc(100vw - 20px);

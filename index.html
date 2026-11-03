@@ -1227,8 +1227,8 @@ table {
 
         .navbar {
             height: auto !important;
-            min-height: 80px;
-            padding: 4px 10.5px !important;
+            min-height: 50px;
+            padding: 10px 10.5px !important;
             gap: 4px;
             flex-wrap: nowrap !important;
             overflow: visible !important;
@@ -1282,7 +1282,7 @@ table {
         .dropdown-content {
             position: fixed !important;
             top: auto;  
-            margin-top:14px;          
+            margin-top:18px;          
             left: auto;
             min-width: 150px;
             max-width: calc(100vw - 20px);
@@ -2864,7 +2864,7 @@ html body #tab-other td.bowel-note-cell {
         overflow: hidden !important;
         text-overflow: ellipsis !important;
     }
-    html body .navbar .nav-menu { flex: 0 0 auto !important; gap: 4px !important; }
+    html body .navbar .nav-menu { flex: 0 0 auto !important; gap: 0px !important; }
     html body .navbar .nav-btn {
         font-size: 14px !important;
         padding: 3px 10px !important;
@@ -5766,5 +5766,83 @@ html body #itemFilterTags .filter-tag.active {
     html body .navbar .nav-menu { margin-top: auto !important; }
 }
 </style>
+<!-- 💊 終極大變身：將指定輸入框、按鈕、下拉選單全面升級為完美膠囊圓角（全面破防修正版） 💊 -->
+<style id="capsule-rounded-corners">
+/* 1. 電費模式、用品模式、灌溉模式裡面，所有被打勾的輸入框與下拉選單 */
+body :is(#tab-elec, #tab-items, #tab-other) input[type="text"]:not(.edit-input),
+body :is(#tab-elec, #tab-items, #tab-other) input[type="date"]:not(.edit-input),
+body :is(#tab-elec, #tab-items, #tab-other) input[type="time"]:not(.edit-input),
+body :is(#tab-elec, #tab-items, #tab-other) input[type="number"]:not(.edit-input),
+body :is(#tab-elec, #tab-items, #tab-other) select,
+body :is(#tab-elec, #tab-items, #tab-other) .bowel-note-box {
+    border-radius: 999px !important; /* 999px 是網頁中創造「膠囊圓角」的標準黃金數值 */
+}
+
+/* 2. 所有被打勾的行動按鈕、今天快選鈕、重新設定按鈕 */
+body :is(#tab-elec, #tab-items, #tab-other) .btn-add,
+body :is(#tab-elec, #tab-items, #tab-other) .btn-reset,
+body :is(#tab-elec, #tab-items, #tab-other) .today-btn,
+body :is(#tab-elec, #tab-items, #tab-other) .search-panel button,
+body :is(#tab-elec, #tab-items, #tab-other) .batch-panel button,
+html body #btnAutoSerial,
+html body .btn-sm.btn-save#btnAutoSerial {
+    border-radius: 999px !important; /* 強制擊碎原有的 15px 鐵板，讓自動編號也乖乖團結變膠囊！ */
+}
+
+/* 3. 修正 iOS / Safari 手機瀏覽器上，原生日期/時間欄位可能會被預設樣式切掉半圓的問題 */
+body input[type="date"], 
+body input[type="time"] {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+</style>
+<!-- 📐 頂部導航欄完美增高：擴充頭頂紅框空間，讓比例更優雅 📐 -->
+<style id="nav-top-padding-expand">
+@media screen and (max-width: 768px) {
+    html body .navbar {
+        /* 將頭頂內距從原本的 6px 加大到 14px，精準塞入高質感空間！ */
+        padding-top: 14px !important;   
+        
+        /* 保持原本下方的緊湊，讓按鈕與文字不會上下散開 */
+        padding-bottom: 4px !important; 
+        min-height: 0 !important;
+        height: auto !important;
+    }
+}
+</style>
+<!-- 📐 頂部導航欄下巴終極歸零鎖死：全面破防消滅所有按鈕底部的頑固肥肉 📐 -->
+<style id="nav-bottom-flatten-ultimate">
+@media screen and (max-width: 768px) {
+    /* 1. 直接把最外層大卡片內部的「下巴Padding」縮到極致 0，強制外框往上吸！ */
+    html body .navbar,
+    body .navbar {
+        padding-bottom: 6px !important; /* 只留 4px 精緻邊緣，其餘肥肉通通不准留！ */
+        min-height: 0 !important;
+        height: auto !important;
+    }
+
+    /* 2. 徹底擊碎舊程式碼裡按鈕屁股下的 5px 肥肉（精準破防 .nav-item） */
+    html body .navbar .nav-menu .nav-item,
+    body .nav-item {
+        margin-bottom: 0px !important;  /* 強制歸零！不准在屁股下面偷塞空間 */
+        height: 38px !important;
+    }
+
+    /* 3. 讓三個按鈕的選單外框也一起扁到底 */
+    html body .navbar .nav-menu,
+    body .nav-menu {
+        height: 38px !important;
+        min-height: 38px !important;
+        margin-bottom: 0px !important;
+        padding-bottom: 0px !important;
+    }
+
+    /* 4. 順便把最後面那個 #nav-bottom-gap 偷加進來的下內距徹底抹平 */
+    #nav-bottom-gap {
+        display: none !important; /* 直接讓那個可能產生干擾的舊樣式失效 */
+    }
+}
+</style>
+
 </body>
 </html>

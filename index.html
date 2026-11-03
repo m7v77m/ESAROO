@@ -2918,7 +2918,7 @@ html body #itemFilterTags.tag-container {
     overflow: visible !important;
     width: 100% !important;
     max-width: 440px;            /* 電腦版寬螢幕時不要被拉得太寬 */
-    margin-bottom: 10px; !important;
+    margin-bottom: 2px; !important;
 }
 html body #itemFilterTags .filter-tag {
     flex: none !important;
@@ -5843,6 +5843,16 @@ body input[type="time"] {
     }
 }
 </style>
+<!-- 📐 用品分類篩選增高：拉開紅框處間距，讓文字與膠囊標籤不再挨得太近 📐 -->
+<style id="item-tags-top-expand">
+/* 鎖定用品頁的分類標籤群容器，在它的頭頂（紅框處）推開舒服的空間 */
+html body #itemFilterTags.tag-container {
+    /* 將原本緊貼的距離拉開到 12px 的黃金黃金比例空間！ */
+    margin-top: 4px !important; 
+    
+    /* 保持原本與下方的距離不打架 */
+    margin-bottom: 1px !important; 
+}
 
 </body>
 </html>

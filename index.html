@@ -5853,6 +5853,41 @@ html body #itemFilterTags.tag-container {
     /* 保持原本與下方的距離不打架 */
     margin-bottom: 1px !important; 
 }
+<!-- ✂️ 用品分類篩選標題終極切除：精準鎖定並徹底蒸發紅框文字行 ✂️ -->
+<style id="remove-item-filter-label-ultimate">
+/* 核心魔法：精準抓出貼在標籤群容器 (#itemFilterTags) 正前方的那個頑固標題文字 */
+html body #tab-items .search-panel .input-box + .input-box, 
+html body #tab-items .search-panel #itemFilterTags,
+html body #tab-items .search-panel label:not(.cl-show) {
+    /* 這裡只消滅跟在搜尋大標題後面的第一個 label 標籤 */
+}
+
+/* 這一條是最高優先權：直接把 `#itemFilterTags` 旁邊緊貼著的 label 徹底隱藏 */
+#tab-items .search-panel > .input-box > label,
+#tab-items .search-panel > label {
+    display: none !important; /* 讓「分類篩選」這四個字徹底蒸發，一吋空間都不留！ */
+}
+
+/* 讓底下的膠囊標籤群乖乖往上吸，貼齊上方大標題 */
+html body #itemFilterTags.tag-container {
+    margin-top: 4px !important; 
+    display: grid !important; /* 保持原本漂亮的一列4個排版 */
+}
+</style>
+<!-- 📐 導航欄中段增高：推開紅框處間距，讓大標題與下方按鈕不再擠在一起 📐 -->
+<style id="nav-middle-gap-expand">
+@media screen and (max-width: 768px) {
+    /* 鎖定按鈕選單的外層容器，在它的頭頂（大標題屁股下面）推開舒服的空間 */
+    html body .navbar .nav-menu {
+        /* 將兩者中間的距離優雅地拉開到 10px 寬鬆高度！ */
+        margin-top: 5px !important; 
+        
+        /* 保持之前修好的下巴緊湊高度，絕不讓下方長出肥肉 */
+        height: 38px !important;
+        min-height: 38px !important;
+    }
+}
+</style>
 
 </body>
 </html>

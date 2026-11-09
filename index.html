@@ -2954,7 +2954,7 @@ html body #itemFilterTags .filter-tag {
 .ea-card-sub { font-size: 10.5px; color: var(--text-muted); }
 .ea-red { color: var(--danger); }
 .ea-empty { grid-column: 1 / -1; text-align: center; color: var(--text-muted); font-size: 13px; padding: 10.5px; line-height: 1.6; }
-.ea-legend { display: flex; flex-wrap: wrap; justify-content: right; gap: 4px 14px; font-size: 11px; color: var(--text-light); margin-bottom: 4px; }
+.ea-legend { display: flex; flex-wrap: wrap; justify-content: right; gap: 4px 14px; font-size: 11px; color: var(--text-light); margin-top: -6px; margin-bottom: 7px; }
 .ea-dot { display: inline-block; width: 10.5px; height: 10.5px; margin-right: 4px; vertical-align: -1px; }
 .ea-dot-bar { background: #8fa382; border-radius: 3px; }
 .ea-dot-prog { background: #DFE7D8; border: 1px dashed #8fa382; border-radius: 3px; }
@@ -5718,8 +5718,8 @@ html body #elecAnalytics .ea-chart {
 
 /* 🎯 4. 完美融合雙重鎖死：全面砍斷標題頭頂的硬鐵板，讓兩個趨勢標題達到最高優先權的對稱 */
 html body #elecAnalytics .ea-block-title {
-    margin-top: 9.0px !important;       /* 保留原設定：把標題頭頂高度攔腰砍斷只留 9px */
-    margin-bottom: 4px !important;      /* 保留原設定：縮小標題與下方圖表/表格之間的距離 */
+    margin-top: 7.0px !important;       /* 保留原設定：把標題頭頂高度攔腰砍斷只留 6px */
+    margin-bottom: 10px !important;      /* 保留原設定：縮小標題與下方圖表/表格之間的距離 */
 }
 </style>
 
@@ -5920,16 +5920,16 @@ html body #itemFilterTags.tag-container {
 .bcal-nav, .bcal-today { border: 1px solid var(--border-light); background: var(--milk-tea-pale); color: var(--text-main); height: 34px; border-radius: 17px; cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 600; }
 .bcal-nav { width: 34px; font-size: 20px; line-height: 1; padding: 0; }
 .bcal-today { padding: 0 14px; background: #8fa382; color: #F5EDE0; }
-.bcal-summary { text-align: center; font-size: 12.5px; color: var(--text-light); margin-bottom: 10px; }
+.bcal-summary { text-align: center; font-size: 13px; color: var(--text-light); margin-bottom: 10px; }
 .bcal-summary b { color: var(--matcha-dark); }
-.bcal-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; font-size: 12px; font-weight: 700; color: #6f8264; padding: 4px 0; background: #eef2ea; border-radius: 10px; column-gap: 10px; }
+.bcal-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; font-size: 12px; font-weight: 700; color: #6f8264; padding: 4px 0; background: #eef2ea; border-radius: 15px; column-gap: 10px; }
 .bcal-week span:first-child, .bcal-week span:last-child { color: #b9865c; }
 .bcal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
 .bcal-cell { position: relative; min-height: 52px; border: 1px solid transparent; border-radius: 7px; background: #f3efe6; color: var(--text-main); font-family: inherit; padding: 3px 3px 3px 5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 0; text-align: center; overflow: hidden; }
 .bcal-cell.bcal-out { visibility: hidden; pointer-events: none; }
 .bcal-cell .bcal-d { font-size: 13px; font-weight: 600; line-height: 1.2; align-self: flex-start; }
 .bcal-cell .bcal-t { font-size: 11px; line-height: 1.3; color: #8a4a2c; font-weight: 600; white-space: nowrap; }
-.bcal-cell .bcal-more { font-size: 10.5px; line-height: 1.3; color: var(--text-muted); font-weight: 700; }
+.bcal-cell .bcal-more { font-size: 10.5px; line-height: 1.3; color: #DFE7D8; font-weight: 700; }
 .bcal-cell .bcal-more-m { display: none; }
 .bcal-cell .bcal-cnt { position: absolute; top: 3px; right: 4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: #8fa382; color: #fff; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center; }
 /* 次數越多顏色越深；4 次以上用暖色提醒「不尋常的一天」 */
@@ -5941,18 +5941,18 @@ html body #itemFilterTags.tag-container {
 .bcal-cell.bcal-l4 .bcal-t { color: #8a4a2c; }
 .bcal-cell.bcal-today-c { box-shadow: inset 0 0 0 2px #DFE7D8; background: #D4A578; }
 .bcal-cell.bcal-sel { outline: 2.5px solid #5D7A42; outline-offset: -2px; }
-.bcal-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 7px; margin-bottom: -2px; font-size: 11.5px; color: var(--text-light); }
+.bcal-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 7px; margin-bottom: -8px; font-size: 11.5px; color: var(--text-light); }
 .bcal-legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 3px; border: 1px solid #d9cfc0; }
 .bcal-detail { margin-top: 10px; padding-top: 0px; border-top: 1px dashed #D4B896; font-size: 13.5px; color: var(--text-main); }
-.bcal-detail .bcal-dt { font-weight: 700; color: var(--matcha-dark); margin-top: 3px; margin-bottom: 5px; }
-.bcal-detail .bcal-rec { display: flex; gap: 10px; padding: 6px 8px; margin-bottom: -1px; background: var(--beige); border-radius: 10px; }
+.bcal-detail .bcal-dt { font-weight: 700; color: var(--matcha-dark); margin-top: 4px; margin-bottom: 5px; }
+.bcal-detail .bcal-rec { display: flex; gap: 2px; padding: 2px 8px; margin-bottom: -1px; background: var(--beige); border-radius: 10px; }
 .bcal-detail .bcal-rt { flex: 0 0 auto; font-weight: 700; }
 .bcal-detail .bcal-rn { flex: 1; white-space: pre-wrap; word-break: break-word; color: var(--text-light); }
-.bcal-detail .bcal-empty { color: var(--text-muted); }
+.bcal-detail .bcal-empty { font-size: 12px; color: var(--text-muted); }
 .bcal-detail .bcal-go { margin-top: 6px; border: 1px solid #8fa382; background: transparent; color: var(--matcha-dark); border-radius: 15px; padding: 5px 14px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; }
 @media screen and (max-width: 768px) {
     .bcal-wrap { padding: 10px; max-width: none; }
-    .bcal-grid { gap: 10px; }
+    .bcal-grid { gap: 7px; }
     .bcal-cell { min-height: 44px; border-radius: 4px; padding: 2px 1px 2px 3px; }
     .bcal-cell .bcal-d { font-size: 10.5px; }
     .bcal-cell .bcal-t { font-size: 9px; letter-spacing: -0.2px; color: #8a4a2c;}

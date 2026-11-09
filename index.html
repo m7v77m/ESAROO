@@ -2954,7 +2954,7 @@ html body #itemFilterTags .filter-tag {
 .ea-card-sub { font-size: 10.5px; color: var(--text-muted); }
 .ea-red { color: var(--danger); }
 .ea-empty { grid-column: 1 / -1; text-align: center; color: var(--text-muted); font-size: 13px; padding: 10.5px; line-height: 1.6; }
-.ea-legend { display: flex; flex-wrap: wrap; justify-content: right; gap: 4px 14px; font-size: 11px; color: var(--text-light); margin-top: -6px; margin-bottom: 8px; }
+.ea-legend { display: flex; flex-wrap: wrap; justify-content: right; gap: 4px 14px; font-size: 11px; color: var(--text-light); margin-top: -5px; margin-bottom: 2px; }
 .ea-dot { display: inline-block; width: 10.5px; height: 10.5px; margin-right: 4px; vertical-align: -1px; }
 .ea-dot-bar { background: #8fa382; border-radius: 3px; }
 .ea-dot-prog { background: #DFE7D8; border: 1px dashed #8fa382; border-radius: 3px; }
@@ -3058,7 +3058,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 <div class="ea-legend"><span><i class="ea-dot ea-dot-bar"></i>每月電費（元）</span><span><i class="ea-dot ea-dot-line"></i>日均度數</span><span><i class="ea-dot ea-dot-prog"></i>進行中（預估）</span></div>
                 <div id="eaChart" class="ea-chart"></div>
 
-                <div class="ea-block-title">🗓️ 每月週期統計表（點一列可篩選該月明細）</div>
+                <div class="ea-block-title">🗓️ 每月週期統計表（點其中一個月份，下方會顯示該月明細）</div>
                 <div class="ea-scroll">
                     <table class="ea-table">
                         <thead>
@@ -5922,7 +5922,7 @@ html body #itemFilterTags.tag-container {
 .bcal-today { padding: 0 14px; background: #8fa382; color: #F5EDE0; }
 .bcal-summary { text-align: center; font-size: 13px; color: var(--text-light); margin-bottom: 8px; }
 .bcal-summary b { color: var(--matcha-dark); }
-.bcal-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; font-size: 12px; font-weight: 700; color: #6f8264; padding: 4px 0; background: #eef2ea; border-radius: 15px; column-gap: 10px; }
+.bcal-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); text-align: center; font-size: 12px; font-weight: 700; color: #6f8264; padding: 8px 0; background: #eef2ea; border-radius: 15px; column-gap: 10px; }
 .bcal-week span:first-child, .bcal-week span:last-child { color: #b9865c; }
 .bcal-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 10px; margin-top: 9px; }
 .bcal-cell { position: relative; min-height: 52px; border: 1px solid transparent; border-radius: 7px; background: #f3efe6; color: var(--text-main); font-family: inherit; padding: 3px 3px 3px 5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 0; text-align: center; overflow: hidden; }
@@ -5948,7 +5948,7 @@ html body #itemFilterTags.tag-container {
 .bcal-detail .bcal-rec { display: flex; gap: 2px; padding: 2px 8px; margin-bottom: -1px; background: var(--beige); border-radius: 10px; }
 .bcal-detail .bcal-rt { flex: 0 0 auto; font-weight: 700; }
 .bcal-detail .bcal-rn { flex: 1; white-space: pre-wrap; word-break: break-word; color: var(--text-light); }
-.bcal-detail .bcal-empty { font-size: 12px; color: var(--text-muted); }
+.bcal-detail .bcal-empty { font-size: 11px; color: var(--text-muted); }
 .bcal-detail .bcal-go { margin-top: 6px; border: 1px solid #8fa382; background: transparent; color: var(--matcha-dark); border-radius: 15px; padding: 5px 14px; cursor: pointer; font-family: inherit; font-size: 13px; font-weight: 600; }
 @media screen and (max-width: 768px) {
     .bcal-wrap { padding: 10px; max-width: none; }

@@ -107,7 +107,7 @@
             align-items: center;
             align-self: center;
             margin-botton: 20px;
-            border: 1.5px Solid #D4B896;
+            border: 1.0px Solid #D4B896;
         }
 
         .nav-item:hover .nav-btn,
@@ -5900,7 +5900,7 @@ html body #itemFilterTags.tag-container {
     /* 鎖定按鈕選單的外層容器，在它的頭頂（大標題屁股下面）推開舒服的空間 */
     html body .navbar .nav-menu {
         /* 將兩者中間的距離優雅地拉開到 10px 寬鬆高度！ */
-        margin-top: 2px !important; 
+        margin-top: 10px !important; 
         
         /* 保持之前修好的下巴緊湊高度，絕不讓下方長出肥肉 */
         height: 38px !important;
@@ -6087,11 +6087,12 @@ html body #tab-other.bowel-cal-mode { padding-bottom: 10.5px !important; }   /* 
 /* 灌溉頁標題欄：跟電費／用品頁一樣（兩端圓角 15px、高度 39px、字級 13px） */
 html body #tab-other > table { border-collapse: separate !important; border-spacing: 0 !important; }
 html body #tab-other > table thead th { font-size: 13px !important; height: 39px !important; padding: 8px 9px !important; }
-html body #tab-other > table thead th:first-child { border-top-left-radius: 15px !important; border-bottom-left-radius: 15px !important; }   /* ← 標題欄左端圓角 */
-html body #tab-other > table thead th:last-child { border-top-right-radius: 15px !important; border-bottom-right-radius: 15px !important; }  /* ← 標題欄右端圓角 */
+html body #tab-other > table thead th:first-child { border-top-left-radius: 15px !important; border-bottom-left-radius: 0 !important; }   /* ← 標題欄左端：上圓角 15px、下直角 */
+html body #tab-other > table thead th:last-child { border-top-right-radius: 15px !important; border-bottom-right-radius: 0 !important; }  /* ← 標題欄右端：上圓角 15px、下直角 */
 /* 主標題導航：三個按鈕之間 10px，按鈕到卡片左右／下緣也是 10px */
 html body .navbar .nav-menu { gap: 10px !important; }
-@media screen and (max-width: 768px) { html body .navbar { padding-bottom: 8.5px !important; } }   /* 手機：按鈕下緣到卡片底 10px */
+html body .navbar .nav-btn { border-radius: 999px !important; }   /* ← 導航三顆按鈕圓角：999px＝膠囊，想要方一點就改小，例如 15px */
+@media screen and (max-width: 768px) { html body .navbar { padding-top: 6px !important; padding-bottom: 8.0px !important; } }   /* 手機：padding-top＝卡片上緣到標題的空白；padding-bottom＝按鈕下緣到卡片底 10px */
 </style>
 </body>
 </html>

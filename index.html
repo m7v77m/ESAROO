@@ -1258,7 +1258,7 @@ table {
         .nav-item {
             flex: 0 0 auto;
             height: 38px !important;
-            margin-bottom:5px;
+            margin-bottom: 5px;
             overflow: visible !important;
         }
 
@@ -5899,8 +5899,8 @@ html body #itemFilterTags.tag-container {
 @media screen and (max-width: 768px) {
     /* 鎖定按鈕選單的外層容器，在它的頭頂（大標題屁股下面）推開舒服的空間 */
     html body .navbar .nav-menu {
-        /* 將兩者中間的距離優雅地拉開到 10px 寬鬆高度！ */
-        margin-top: 10px !important; 
+        /* 將兩者中間的距離優雅地拉開到 6px 寬鬆高度！ */
+        margin-top: 6px !important; 
         
         /* 保持之前修好的下巴緊湊高度，絕不讓下方長出肥肉 */
         height: 38px !important;
@@ -6093,6 +6093,10 @@ html body #tab-other > table thead th:last-child { border-top-right-radius: 15px
 html body .navbar .nav-menu { gap: 10px !important; }
 html body .navbar .nav-btn { border-radius: 999px !important; }   /* ← 導航三顆按鈕圓角：999px＝膠囊，想要方一點就改小，例如 15px */
 @media screen and (max-width: 768px) { html body .navbar { padding-top: 6px !important; padding-bottom: 8.0px !important; } }   /* 手機：padding-top＝卡片上緣到標題的空白；padding-bottom＝按鈕下緣到卡片底 10px */
+/* 三個列表：每列上下空白統一壓成 4px（原本 8px） */
+html body #tab-elec > table tbody td:not([colspan]),
+html body #tab-items > table tbody td:not([colspan]),
+html body #tab-other > table tbody td:not([colspan]) { padding-top: 4px !important; padding-bottom: 4px !important; }   /* ← 數字改這裡 */
 </style>
 </body>
 </html>

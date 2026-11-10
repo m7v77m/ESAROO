@@ -6083,5 +6083,15 @@ html body #tab-other.bowel-cal-mode { padding-bottom: 10.5px !important; }   /* 
     }
 })();
 </script>
+<style id="bowel-header-nav-tweak">
+/* 灌溉頁標題欄：跟電費／用品頁一樣（兩端圓角 15px、高度 39px、字級 13px） */
+html body #tab-other > table { border-collapse: separate !important; border-spacing: 0 !important; }
+html body #tab-other > table thead th { font-size: 13px !important; height: 39px !important; padding: 8px 9px !important; }
+html body #tab-other > table thead th:first-child { border-top-left-radius: 15px !important; border-bottom-left-radius: 15px !important; }   /* ← 標題欄左端圓角 */
+html body #tab-other > table thead th:last-child { border-top-right-radius: 15px !important; border-bottom-right-radius: 15px !important; }  /* ← 標題欄右端圓角 */
+/* 主標題導航：三個按鈕之間 10px，按鈕到卡片左右／下緣也是 10px */
+html body .navbar .nav-menu { gap: 10px !important; }
+@media screen and (max-width: 768px) { html body .navbar { padding-bottom: 8.5px !important; } }   /* 手機：按鈕下緣到卡片底 10px */
+</style>
 </body>
 </html>

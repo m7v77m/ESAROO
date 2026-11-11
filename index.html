@@ -6126,16 +6126,33 @@ html body #itemFilterTags .filter-tag .ft-stat { display: block; font-size: 10px
 html body #itemFilterTags .filter-tag.ft-zero { opacity: 0.6; }
 </style>
 
-<style id="fix-bcal-capsule">
-/* 將「列表／月曆」切換外框、切換按鈕、「<」「>」方向鈕、「今天」按鈕改回膠囊圓角 */
-html body #elecMonthChips .filter-tag,
+<style id="fix-capsule-tags">
+/* 1. 統一恢復為膠囊圓角 */
 html body #tab-other .bcal-switch,
 html body #tab-other .bcal-tab,
 html body #tab-other .bcal-nav,
-html body #tab-other .bcal-today {
+html body #tab-other .bcal-today,
+html body #elecMonthChips .filter-tag {
     border-radius: 999px !important;
 }
+
+/* 2. 讓「<」「>」「今天」裡面的文字上下左右完美置中 */
+html body #tab-other .bcal-nav,
+html body #tab-other .bcal-today {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* 3. 微調「<」「>」符號的視覺重心（部分手機字體的 ‹ › 符號本身會微偏下，往上拉 1px 更正中） */
+html body #tab-other .bcal-nav {
+    padding-bottom: 2px !important;
+}
 </style>
+
 
 </body>
 </html>

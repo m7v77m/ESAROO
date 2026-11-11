@@ -6127,12 +6127,17 @@ html body #itemFilterTags .filter-tag.ft-zero { opacity: 0.6; }
 </style>
 
 <style id="fix-capsule-tags">
-/* 1. 統一恢復為膠囊圓角 */
+/* 1. 統一恢復為膠囊圓角（包含灌溉切換鈕、月曆方向鈕、電費月份標籤、以及所有列表的操作按鈕） */
 html body #tab-other .bcal-switch,
 html body #tab-other .bcal-tab,
 html body #tab-other .bcal-nav,
 html body #tab-other .bcal-today,
-html body #elecMonthChips .filter-tag {
+html body #elecMonthChips .filter-tag,
+html body table .btn-sm,
+html body table .btn-edit,
+html body table .btn-delete,
+html body table .btn-save,
+html body table .btn-cancel {
     border-radius: 999px !important;
 }
 
@@ -6147,9 +6152,9 @@ html body #tab-other .bcal-today {
     padding-bottom: 0 !important;
 }
 
-/* 3. 微調「<」「>」符號的視覺重心（部分手機字體的 ‹ › 符號本身會微偏下，往上拉 1px 更正中） */
+/* 3. 微調「<」「>」符號的視覺重心 */
 html body #tab-other .bcal-nav {
-    padding-bottom: 2px !important;
+    padding-bottom: 8px !important;
 }
 </style>
 

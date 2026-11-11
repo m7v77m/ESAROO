@@ -1058,7 +1058,7 @@ button,
 .tag,
 .filter-tag,
 .batch-title {
-    border-radius: 15px !important;
+    border-radius: 8px !important;
 }
 
 /* 覆蓋所有行內寫死的 border-radius */
@@ -3484,7 +3484,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
         }
 
         function makeTagHTML(name, stat) {
-            const line2 = stat.total === 0 ? '0筆' : `${stat.total}筆·${stat.avg === null ? '-' : stat.avg + '天'}`;
+            const line2 = stat.total === 0 ? '0筆' : `${stat.total}筆/${stat.avg === null ? '-' : stat.avg + '天'}`;
             return `<span class="ft-name">${name}</span><span class="ft-stat">${line2}</span>`;
         }
 

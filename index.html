@@ -3185,7 +3185,6 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                 
                 <!-- 2+3. 批次面板+統計 - 右邊紅框3欄模板 -->
                 <div class="batch-panel" style="border-radius: var(--radius-md); display:flex; flex-direction:column; gap:8px; padding:10.5px 12px;">
-                    <div class="stats-panel items-stats" id="itemStats" style="width:100%; border-radius:15px; padding:0.1cm 10.5px; display:flex; justify-content:space-around; align-items:center; min-height:auto;"></div>
                     
                     <div class="items-entry-area" style="display:flex; flex-direction:column; width:100%; gap:8px;">
                         <span class="batch-title">🛠️ 分類管理：</span>
@@ -3472,29 +3471,49 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
         // ================================================================
         //  分類標籤篩選
         // ================================================================
+        // 每個分類的統計：筆數＝該分類全部紀錄；平均天數＝已填「最後日期」的紀錄的平均使用天數
+        function getCategoryStat(list) {
+            let total = list.length, done = 0, sum = 0;
+            list.forEach(item => {
+                if (item.end) {
+                    const days = Math.floor((new Date(item.end) - new Date(item.start)) / 86400000);
+                    if (days >= 0) { sum += days; done++; }
+                }
+            });
+            return { total, avg: done ? (sum / done).toFixed(1) : null };
+        }
+
+        function makeTagHTML(name, stat) {
+            const line2 = stat.total === 0 ? '0筆' : `${stat.total}筆·${stat.avg === null ? '-' : stat.avg + '天'}`;
+            return `<span class="ft-name">${name}</span><span class="ft-stat">${line2}</span>`;
+        }
+
         function renderCategoryTags() {
             const container = document.getElementById('itemFilterTags');
             if (!container) return;
             const currentVal = document.getElementById('itemFilterCategory').value;
             container.innerHTML = '';
+            const items = appData.items || [];
 
             const allTag = document.createElement('span');
             allTag.className = `filter-tag ${currentVal === '' ? 'active' : ''}`;
-            allTag.textContent = '全部分類';
+            allTag.innerHTML = makeTagHTML('全部分類', getCategoryStat(items));
             allTag.onclick = () => setTagFilter('');
             container.appendChild(allTag);
 
             appData.categories.forEach(cat => {
                 const tag = document.createElement('span');
-                tag.className = `filter-tag ${currentVal === cat ? 'active' : ''}`;
-                tag.textContent = cat;
+                const stat = getCategoryStat(items.filter(it => it.category === cat));
+                tag.className = `filter-tag ${currentVal === cat ? 'active' : ''} ${stat.total === 0 ? 'ft-zero' : ''}`;
+                tag.innerHTML = makeTagHTML(String(cat).replace(/&/g, '&amp;').replace(/</g, '&lt;'), stat);
                 tag.onclick = () => setTagFilter(cat);
                 container.appendChild(tag);
             });
 
             const uncatTag = document.createElement('span');
-            uncatTag.className = `filter-tag ${currentVal === '尚未分類' ? 'active' : ''}`;
-            uncatTag.textContent = '尚未分類';
+            const uStat = getCategoryStat(items.filter(it => !it.category || it.category === '尚未分類'));
+            uncatTag.className = `filter-tag ${currentVal === '尚未分類' ? 'active' : ''} ${uStat.total === 0 ? 'ft-zero' : ''}`;
+            uncatTag.innerHTML = makeTagHTML('尚未分類', uStat);
             uncatTag.onclick = () => setTagFilter('尚未分類');
             container.appendChild(uncatTag);
         }
@@ -4570,6 +4589,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
             });
             restoreCheckboxStates();
             calculateItemStats(filteredItems);
+            renderCategoryTags();
         }
 
         function calculateItemStats(records) {
@@ -6097,6 +6117,13 @@ html body .navbar .nav-btn { border-radius: 999px !important; }   /* ← 導航�
 html body #tab-elec > table tbody td:not([colspan]),
 html body #tab-items > table tbody td:not([colspan]),
 html body #tab-other > table tbody td:not([colspan]) { padding-top: 4.5px !important; padding-bottom: 4.5px !important; }   /* ← 數字改這裡 */
+</style>
+<style id="item-tag-stats">
+/* 用品分類標籤：第一行分類名稱、第二行「筆數・平均天數」 */
+html body #itemFilterTags .filter-tag { padding: 3px 2px !important; line-height: 1.2 !important; }
+html body #itemFilterTags .filter-tag .ft-name { display: block; font-size: 13px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; }
+html body #itemFilterTags .filter-tag .ft-stat { display: block; font-size: 10px; line-height: 1.3; letter-spacing: -0.2px; opacity: 0.85; overflow: hidden; white-space: nowrap; }   /* ← 第二行字級改這裡 */
+html body #itemFilterTags .filter-tag.ft-zero { opacity: 0.6; }
 </style>
 </body>
 </html>

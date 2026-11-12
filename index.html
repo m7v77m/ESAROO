@@ -6159,5 +6159,14 @@ html body #tab-other .bcal-nav {
 </style>
 
 
+<style id="edit-row-pill">
+/* 編輯列的小框框（電費／用品／灌溉）：全部改回膠囊圓角
+   框高 28px，圓角給 14px 以上就是完整的膠囊形 */
+html body :is(#tab-elec, #tab-items, #tab-other) > table :is(input, select, textarea).edit-input,
+html body :is(#tab-elec, #tab-items, #tab-other) > table input.edit-input:is([type="date"], [type="time"], [type="number"], [type="text"]) {
+    border-radius: 14px !important;
+}
+</style>
+
 </body>
 </html>

@@ -6209,10 +6209,12 @@ html body #elecNoteEditorModal .modal-box button {
 <style id="fix-weekday-simple">
 @media screen and (max-width: 768px) {
     html body #tab-other > table td:first-child {
-        white-space: nowrap !important;
+        white-space: normal !important;
         word-break: keep-all !important;
         overflow-wrap: normal !important;
-        width: auto !important;
+        overflow: visible !important;
+        min-width: 115px !important;
+        padding-right: 12px !important;
     }
 }
 </style>

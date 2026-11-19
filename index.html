@@ -6219,5 +6219,64 @@ html body #elecNoteEditorModal .modal-box button {
 }
 </style>
 
+<script id="add-supplies-weekday">
+(function () {
+    const days = ['日', '一', '二', '三', '四', '五', '六'];
+
+    function getWeekdayHtml(dateText) {
+        const match = (dateText || '').trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (!match) return '';
+        const y = parseInt(match[1], 10);
+        const m = parseInt(match[2], 10) - 1;
+        const d = parseInt(match[3], 10);
+        const dt = new Date(y, m, d);
+        if (isNaN(dt.getTime())) return '';
+        return `<span class="wkday-next">(${days[dt.getDay()]})</span>`;
+    }
+
+    function enhanceSuppliesDates() {
+        // 找出表頭有「購買日期」或「最終日期」的表格
+        document.querySelectorAll('table').forEach((table) => {
+            const headers = Array.from(table.querySelectorAll('thead th, tr:first-child th'));
+            if (!headers.length) return;
+
+            const targetCols = [];
+            headers.forEach((th, idx) => {
+                const txt = th.textContent.trim();
+                if (txt.includes('購買日期') || txt.includes('最終日期')) {
+                    targetCols.push(idx);
+                }
+            });
+            if (!targetCols.length) return;
+
+            table.querySelectorAll('tbody tr, tr').forEach((tr) => {
+                const cells = tr.querySelectorAll('td');
+                if (!cells.length) return;
+                targetCols.forEach((colIdx) => {
+                    const td = cells[colIdx];
+                    if (!td || td.querySelector('.wkday-next')) return;
+                    const rawText = td.textContent.trim();
+                    const wkHtml = getWeekdayHtml(rawText);
+                    if (wkHtml) {
+                        td.innerHTML = `<span class="date-main">${rawText}</span>${wkHtml}`;
+                    }
+                });
+            });
+        });
+    }
+
+    enhanceSuppliesDates();
+    const observer = new MutationObserver(enhanceSuppliesDates);
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+<style id="supplies-weekday-style">
+.wkday-next {
+    display: block;
+    margin-top: 2px;
+    white-space: nowrap;
+}
+</style>
+
 </body>
 </html>

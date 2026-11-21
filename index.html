@@ -1713,7 +1713,7 @@ table {
         height: 38px !important;
         min-height: 38px !important;
         padding: 0 8px !important;
-        font-size: 14px !important;
+        font-size: 13px !important;
         box-sizing: border-box !important;
     }
 
@@ -3229,7 +3229,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                                 <button class="btn-sm btn-save" style="background-color:var(--milk-tea-dark); height:38px; width:100%; padding:0 10.5px; border-radius: var(--radius-md); white-space:nowrap; font-size:13px;" onclick="batchUpdateCategory()">套用選項</button>
                             </div>
                             <div style="min-width:0;">
-                                <button class="btn-sm btn-edit" style="height:38px; width:100%; margin:0; padding:0 10.5px; border-radius: var(--radius-md); font-size:12px;" onclick="openCategoryModal()">管理分類</button>
+                                <button class="btn-sm btn-edit" style="height:38px; width:100%; margin:0; padding:0 10.5px; border-radius: var(--radius-md); font-size:13px;" onclick="openCategoryModal()">管理分類</button>
                             </div>
                             <!-- 自訂分類按鈕：跟管理分類放一起，上下各約 10.5px -->
                             <div id="customCategoryBtnRow" style="grid-column:1 / -1; min-width:0; margin:2.5px 0 !important;">
@@ -6274,5 +6274,27 @@ html body #elecNoteEditorModal .modal-box button {
 }
 </style>
 
+<!-- ============================================================
+     ✏️ 按鈕字體｜自由修改區（想改只要改下面兩個數字）
+     適用：電費 5 顆／用品 5 顆／灌溉 2 顆，共 12 顆大按鈕
+     ============================================================ -->
+<style id="btn-font-unify">
+:root {
+    --btn-font-size:   13px;   /* ← 想大一點改 14px，小一點改 12px */
+    --btn-font-weight: 600;    /* ← 500＝稍細　600＝半粗體　700＝粗體 */
+}
+html body :is(#tab-elec, #tab-items, #tab-other) :is(
+    .btn-add,
+    .btn-reset,
+    #btnAutoSerial,
+    .search-panel > .btn-sm,
+    button[onclick="batchUpdateCategory()"],
+    button[onclick="openCategoryModal()"],
+    button[onclick="openInlineCustomCategory()"]
+) {
+    font-size:   var(--btn-font-size)   !important;
+    font-weight: var(--btn-font-weight) !important;
+}
+</style>
 </body>
 </html>

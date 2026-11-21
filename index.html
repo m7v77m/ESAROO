@@ -886,7 +886,7 @@ table:has(#bowelTableBody) td {
 #tab-items > table th:nth-child(1),
 #tab-items > table td:nth-child(1) { width: 40px !important; } /* checkbox */
 #tab-items > table th:nth-child(2),
-#tab-items > table td:nth-child(2) { width: 10% !important; } /* 分類 */
+#tab-items > table td:nth-child(2) { width: 10% !important; } /* 分類名稱 */
 #tab-items > table th:nth-child(3),
 #tab-items > table td:nth-child(3) { width: 28% !important; } /* 商品名稱 */
 #tab-items > table th:nth-child(4),
@@ -896,9 +896,9 @@ table:has(#bowelTableBody) td {
 #tab-items > table th:nth-child(6),
 #tab-items > table td:nth-child(6) { width: 8% !important; } /* 使用天數 */
 #tab-items > table th:nth-child(7),
-#tab-items > table td:nth-child(7) { width: 20% !important; } /* 購買商家 */
+#tab-items > table td:nth-child(7) { width: 20% !important; } /* 商家名稱 */
 #tab-items > table th:nth-child(8),
-#tab-items > table td:nth-child(8) { width: 10% !important; } /* 操作 */
+#tab-items > table td:nth-child(8) { width: 10% !important; } /* 編輯取消 */
 
 /* 想要完全等寬版，取消上面，改這個 */
 /*
@@ -1655,7 +1655,7 @@ table {
         line-height: 1.25 !important;
     }
 
-    /* 兩欄排版：分類／商品名稱、購買日期／最終日期、商家／新增 */
+    /* 兩欄排版：品項分類／商品名稱、購買日期／最終日期、商家／新增 */
     #tab-items .items-entry-grid {
         display: grid !important;
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
@@ -2553,7 +2553,7 @@ body :is(#tab-elec, #tab-items, #tab-other) .date-with-today .today-btn {
 </style>
 
 <style id="items-table-wrap-and-edit-dates">
-/* 用品明細：商品名稱(第3欄)、購買商家(第7欄)文字滿格自動換行，不再把欄位越撐越寬 */
+/* 用品明細：商品名稱(第3欄)、商家名稱(第7欄)文字滿格自動換行，不再把欄位越撐越寬 */
 body #tab-items > table td:nth-child(3),
 body #tab-items > table td:nth-child(7) {
     white-space: normal !important;
@@ -3274,7 +3274,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                             </div>
                             <div style="min-width:0;">
                                 <div class="input-box" style="margin:0; width:100%;">
-                                    <label>商家平台</label>
+                                    <label>商家名稱</label>
                                     <input type="text" id="itemStore" placeholder="萬家福、大全聯、九乘九、........." style="width:100%; height:38px; font-size:13px;">
                                 </div>
                             </div>
@@ -3296,8 +3296,8 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                         <th class="sortable-header nowrap-cell" onclick="toggleItemSort('start')">購買日期<span id="sortIndicator_start" class="sort-icon"></span></th>
                         <th class="sortable-header nowrap-cell" onclick="toggleItemSort('end')">最終日期<span id="sortIndicator_end" class="sort-icon"></span></th>
                         <th class="nowrap-cell" style="width:10%;">使用天數</th>
-                        <th style="width:15%;">購買商家</th>
-                        <th class="nowrap-cell" style="width:110.5px;">操作編輯</th>
+                        <th style="width:15%;">商家名稱</th>
+                        <th class="nowrap-cell" style="width:110.5px;">編輯取消</th>
                     </tr>
                 </thead>
                 <tbody id="itemTableBody"></tbody>
@@ -3935,7 +3935,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
         function openElecNoteEditor() {
             openTextEditor('editElecNote', '備註內容', '例如: 5元*尚餘30天=150元+前天度數18729=18879度');
         }
-        // 用品：商品名稱、購買商家也用同一個加大視窗編輯
+        // 用品：商品名稱、商家名稱也用同一個加大視窗編輯
         function openItemTextEditor(inputId, label) {
             const ph = label === '商品名稱' ? '例如: 五月花/厚棒/連續抽取式/衛生紙/永豐餘' : '例如: 全聯福利中心/二中店';
             openTextEditor(inputId, label, ph);
@@ -4580,7 +4580,7 @@ html body #itemTableBody tr:last-child td { border-bottom: 1px solid #D4B896 !im
                             <td><input type="date" id="editItemStart_${item.id}" value="${item.start}" class="edit-input"></td>
                             <td><input type="date" id="editItemEnd_${item.id}" value="${item.end || ''}" class="edit-input"></td>
                             <td>-</td>
-                            <td><input type="text" id="editItemStore_${item.id}" value="${String(item.store || item.note || '').replace(/"/g,'&quot;')}" class="edit-input" readonly placeholder="點一下開啟編輯視窗" title="點一下開啟編輯視窗" style="cursor:pointer;" onclick="openItemTextEditor('editItemStore_${item.id}','購買商家')" onkeydown="if(event.key==='Enter'){event.preventDefault();openItemTextEditor('editItemStore_${item.id}','購買商家');}"></td>
+                            <td><input type="text" id="editItemStore_${item.id}" value="${String(item.store || item.note || '').replace(/"/g,'&quot;')}" class="edit-input" readonly placeholder="點一下開啟編輯視窗" title="點一下開啟編輯視窗" style="cursor:pointer;" onclick="openItemTextEditor('editItemStore_${item.id}','商家名稱')" onkeydown="if(event.key==='Enter'){event.preventDefault();openItemTextEditor('editItemStore_${item.id}','商家名稱');}"></td>
                             <td class="action-cell">
                                 <button class="btn-sm btn-save" onclick="saveEditItem(${item.id})">儲存</button>
                                 <button class="btn-sm btn-cancel" onclick="cancelEdit()">取消</button>
